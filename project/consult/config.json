@@ -1,0 +1,15 @@
+
+{
+	"title":"Information Business Service",
+	"CSSs": [ 
+		"/project/consult/lib/style.css"
+	],
+	"libs": [
+		"/project/consult/lib/common.js"
+	],
+	"fonts": [
+		"https://fonts.googleapis.com/css?family=Bungee|Indie+Flower"
+	],
+	"routine":"../project/consult/routine.js",
+	"dbName":"mongodb://localhost/appdb"
+}

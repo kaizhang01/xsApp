@@ -1,0 +1,6 @@
+config.json
+CSSs used in viewports need absolute path
+libs used in viewports need absolute path
+
+routine used in server nodejs (relative path) 
+dbName used in server nodejs (relative path) 
