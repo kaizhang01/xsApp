@@ -11,5 +11,5 @@
 		"https://fonts.googleapis.com/css?family=Bungee|Indie+Flower"
 	],
 	"routine":"../project/consult/routine.js",
-	"dbName":"mongodb://relaxslow:197841@ds135757.mlab.com:35757/heroku_v8ch1g76"
+	"dbName":"mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb"
 }
