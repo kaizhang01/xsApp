@@ -1,5 +1,6 @@
 const path = require('path');
 const fs=require('fs');
+const config =require('./config.js');
 exports.returnFile=(res,pathname, data)=> {
 	const mimeType = {
 		'.ico': 'image/x-icon',
@@ -20,9 +21,18 @@ exports.returnFile=(res,pathname, data)=> {
 	const ext = path.parse(pathname).ext;
 	res.setHeader('Content-type', mimeType[ext] || 'text/plain');
 	res.end(data);
-}
+};
+
 exports. handle=(req,res)=> {
-	let fileFullPath=`.${req.parsedPath}`;
+	let fileFullPath;
+	if(req.parsedPath=="/favicon.ico")
+	{
+		fileFullPath=`.${config.cfg.projectPath}${req.parsedPath}`;
+	}
+	else{
+		fileFullPath=`.${req.parsedPath}`;
+	} 
+	
 	if (!fs.existsSync(fileFullPath)) {
 		res.statusCode = 404;
 		res.end(`Error: File ${fileFullPath} not found!`);

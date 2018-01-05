@@ -1,11 +1,12 @@
 
 {
+	"projectPath":"/project/consult",
 	"title":"Information Business Service",
 	"CSSs": [ 
-		"/project/consult/lib/style.css"
+		"/project/consult/style.css"
 	],
 	"libs": [
-		"/project/consult/lib/common.js"
+		"/lib/common.js"
 	],
 	"fonts": [
 		"https://fonts.googleapis.com/css?family=Bungee|Indie+Flower"

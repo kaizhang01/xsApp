@@ -1,6 +1,10 @@
 config.json
+
+projectPath used in search favicon path , need  path root from app.js 
+
 CSSs used in viewports need absolute path
 libs used in viewports need absolute path
 
 routine used in server nodejs (relative path) 
 dbName used in server nodejs (relative path) 
+

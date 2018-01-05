@@ -11,7 +11,6 @@ function* Tasks() {
 	]);
 	router.init(config.cfg.routine);
 	//open local mongo fist when test locally
-	// db.connectDb('mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb');
 	db.connectDb(config.cfg.dbName);
 	server.startServer();
 }

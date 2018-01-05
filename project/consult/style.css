@@ -10,15 +10,14 @@
     margin: 20px;
     font-family: sans-serif;
 }
-img{
-	width: 100%;
-	height: auto;
-}
+
 .Main {
+	background-color: #e5e3e3;
 	margin-top:70px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	height: 100vh;
 }
 
 .PageSide {
