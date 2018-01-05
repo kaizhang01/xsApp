@@ -1,0 +1,39 @@
+
+.ArtWorkFrame{
+	display:flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+
+.ArtWorkTag{
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0;
+	min-height: 10px;
+	height:100%;
+	background-color: rgb(93, 79, 79);
+}
+.ArtWorkName{
+	color: white;
+	margin: 10px;
+	text-align: center;
+	font-family: monospace;
+	font-size: large;
+}
+
+.ArtWorkMenu{
+	color: #7db8a8;
+	margin: 10px;
+	text-align: center;
+	font-family: monospace;
+	font-size: large;
+}
+.ArtWorkMenu:hover{
+	color: #ffffff;
+	margin: 10px;
+	text-align: center;
+	font-family: monospace;
+	font-size: large;
+}

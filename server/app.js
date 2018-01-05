@@ -7,7 +7,7 @@ const router = require("./router.js");
 function* Tasks() {
 
 	yield config.read([
-		"./project/consult/config.json"
+		"./project/drawApp/config.json"
 	]);
 	router.init(config.cfg.routine);
 	//open local mongo fist when test locally

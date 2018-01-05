@@ -1,0 +1,18 @@
+
+{
+	"title":"Draw App",
+	"CSSs": [ 
+		"/project/drawApp/lib/style.css"
+	],
+	"libs": [
+		"/project/drawApp/lib/common.js"
+	],
+	"fonts": [
+		"https://fonts.googleapis.com/css?family=Bungee|Indie+Flower"
+	],
+	"routine":"../project/drawApp/routine.js",
+	"dbName2":"mongodb://localhost/appdb",
+	"dbName0":"mongodb://heroku_v8ch1g76:xs197841@ds135757.mlab.com:35757/heroku_v8ch1g76",
+	"dbName":"mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb"
+
+}
