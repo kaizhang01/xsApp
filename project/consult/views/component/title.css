@@ -96,15 +96,16 @@
     width: 100%;
     height: 400px;
     position: relative;
+    /* float: initial; */
     top: 10vh;
 }
 
 .Banner {
 	position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .BannerImg {

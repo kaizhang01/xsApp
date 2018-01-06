@@ -23,6 +23,11 @@ function main() {
 						img: "/project/consult/img/bannerImg2.png",
 						title:"Cost Less",
 						subtitle:"order now, gain 50% discount"
+					},
+					{
+						img:"/project/consult/img/bannerImg3.jpg",
+						title:"Join Us",
+						subtitle:"build better life together and achieve success earlier"
 					}
 				]
 

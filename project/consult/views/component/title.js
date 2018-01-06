@@ -75,8 +75,9 @@ function aPageNav(banner, bannersData) {
 				let dot=this;
 				animation = 2;
 
-				let speed = 1;
+				let speed = 5;
 				let interval = 5;
+
 				let fromX = 0;
 				let toX = window.innerWidth;
 				if (this.index > currentPageIndex) {
@@ -97,20 +98,22 @@ function aPageNav(banner, bannersData) {
 				});
 
 
-
-				let newBanner = aBanner(bannersData[this.index]);
-				let parent = currentBanner.parentNode;
-				let childs = parent.childNodes;
-				parent.insertBefore(newBanner, childs[childs.length - 1]);
-
-				speed = 1;
-				interval = 5;
 				fromX = -window.innerWidth;
 				toX = 0;
 				if (this.index > currentPageIndex) {
-					speed *= -1;
+					
 					fromX = window.innerWidth;
 				}
+
+				let newBanner = aBanner(bannersData[this.index]);
+				newBanner.style.left=fromX+"px";
+				let parent = currentBanner.parentNode;
+				let childs = parent.childNodes;
+				parent.insertBefore(newBanner, childs[childs.length - 1]);
+				
+		
+
+				
 				moveBanner({
 					banner: newBanner,
 					fromX: fromX,
@@ -139,13 +142,26 @@ function aPageNav(banner, bannersData) {
 				var pos = fromX;
 				var id = setInterval(frame, interval);
 				function frame() {
-					if (pos == toX) {
+					if (posExceedTarget(pos,toX,speed)) {
+						pos=toX;
+						banner.style.left = pos + 'px';
 						clearInterval(id);
 						fun(banner);
 					} else {
 						pos += speed;
 						banner.style.left = pos + 'px';
 					}
+				}
+				function posExceedTarget(pos,target,speed)
+				{
+					if(speed<0)
+					{
+						if(pos<=target)return true;
+					}else if (speed>0)
+					{
+						if(pos>target) return true;
+					}
+					return false
 				}
 			}
 			for (let i = 0; i < bannersData.length; i++) {
