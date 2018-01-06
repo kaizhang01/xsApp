@@ -29,8 +29,8 @@
 .logo{
 	min-width: 100px;
 	width: 30vw;
+	max-width: 30vh;
 }
 .logoImage{
-	width: 80%;
-	padding: 20px;
+	width: 100%;
 }

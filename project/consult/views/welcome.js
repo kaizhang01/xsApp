@@ -9,11 +9,27 @@ function main() {
 		styles: ["Main"], childs: [
 			aNavBar({
 				txt: "solutions",
-				menu: ['Service', 'Products','Stories','About']
+				menu: ['Service', 'Products', 'Stories', 'About']
 			}),
-			
-			aTitle({ childs: buildTitle() }),
-			
+
+			aBannerBox({
+				bannerArr: [
+					{
+						img: "/project/consult/img/bannerImg.jpg",
+						title: "Information Bussiness Services",
+						subtitle: "help build business architecture, information architecture,caber security, flow Chart diagram, help solve the problems in App Development"
+					},
+					{
+						img: "/project/consult/img/bannerImg2.png",
+						title:"Cost Less",
+						subtitle:"order now, gain 50% discount"
+					}
+				]
+
+			})
+
+
+
 		]
 	});
 }
@@ -24,11 +40,7 @@ function main() {
 
 function buildTitle() {
 	return [
-		aText({ txt: "Information Bussiness Services", type: "h1", styles: ["Title-mainTxt"] }),
-		aText({
-			txt: "help build business architecture, information architecture,caber security, flow Chart diagram, help solve the problems in App Development",
-			styles: ["Title-subTxt"]
-		}),
+
 	];
 
 }

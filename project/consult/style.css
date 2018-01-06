@@ -13,11 +13,12 @@
 
 .Main {
 	background-color: #e5e3e3;
-	margin-top:70px;
+	/* margin-top:70px; */
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	height: 100vh;
+	overflow: hidden;
 }
 
 .PageSide {
