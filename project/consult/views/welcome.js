@@ -7,10 +7,6 @@ addComponents(
 function main() {
 	aMain({
 		styles: ["Main"], childs: [
-			aNavBar({
-				txt: "solutions",
-				menu: ['Service', 'Products', 'Stories', 'About']
-			}),
 
 			aBannerBox({
 				bannerArr: [
@@ -21,19 +17,27 @@ function main() {
 					},
 					{
 						img: "/project/consult/img/bannerImg2.png",
-						title:"Cost Less",
-						subtitle:"order now, gain 50% discount"
+						title: "Cost Less",
+						subtitle: "order now, gain 50% discount"
 					},
 					{
-						img:"/project/consult/img/bannerImg3.jpg",
-						title:"Join Us",
-						subtitle:"build better life together and achieve success earlier"
+						img: "/project/consult/img/bannerImg3.jpg",
+						title: "Join Us",
+						subtitle: "build better life together and achieve success earlier"
 					}
 				]
 
-			})
+			}),
 
-
+			aNavBar({
+				logo: "/project/consult/img/logo.png",
+				menu: [
+					{ item: "Service", dropDown: ["cyber security", "data Analyze", "website"] },
+					{ item: "Products", dropDown: ["cloud solution", "Investment"] },
+					{ item: "Stories", dropDown: ["Microsoft", "Google", "Amazon"] },
+					{ item: "About" },
+				]
+			}),
 
 		]
 	});

@@ -1,3 +1,5 @@
+
+
 function aTitle(data) {
 	let { childs } = data;
 	return aDiv({
@@ -33,153 +35,134 @@ function aPageNav(banner, bannersData) {
 	let currentPageIndex = 0;
 	let noclick = false;
 	return aDiv({
-		styles: ["PageNav"], childs: (function () {
-			let pageDotArr = [];
-			function check(oneDot) {
-				currentPageIndex = oneDot.index;
-				for (let i = 0; i < pageDotArr.length; i++) {
-					const dot = pageDotArr[i];
-					if (dot == oneDot) {
-						dot.checked = true;
-						setStyles(dot.childNodes[1], ["PageNavDotSelect"]);
+		styles: ["PageNav"], childs:
+			(function () {
+				let pageDotArr = [];
+				function check(oneDot) {
+					for (let i = 0; i < pageDotArr.length; i++) {
+						const dot = pageDotArr[i];
+						if (dot == oneDot) {
+							dot.checked = true;
+							setStyles(dot.childNodes[1], ["PageNavDotSelect"]);
+						}
+						else {
+							dot.checked = false;
+							setStyles(dot.childNodes[1], ["PageNavDotNormal"]);
+						}
+
 					}
-					else {
-						dot.checked = false;
-						setStyles(dot.childNodes[1], ["PageNavDotNormal"]);
-					}
-
-				}
-			}
-
-			function overDot(evt) {
-
-				let selector = this.childNodes[1];
-				setStyles(selector, ["PageNavDotSelect"]);
-
-
-			}
-			function outDot(evt) {
-				if (this.checked == true)
-					return;
-				let selector = this.childNodes[1];
-				setStyles(selector, ["PageNavDotNormal"]);
-
-			}
-			let animation = 0;
-			function clickDot(evt) {
-
-				if (animation)
-					return;
-				if (currentPageIndex == this.index)
-					return;
-				let dot=this;
-				animation = 2;
-
-				let speed = 5;
-				let interval = 5;
-
-				let fromX = 0;
-				let toX = window.innerWidth;
-				if (this.index > currentPageIndex) {
-					speed *= -1;
-					toX = -window.innerWidth;
 				}
 
-				moveBanner({
-					banner: currentBanner,
-					fromX: fromX,
-					toX: toX,
-					speed: speed,
-					interval: interval,
-					fun: function (banner) {
-						banner.parentNode.removeChild(banner);
-						checkAnimationEnd();
-					}
-				});
+				function overDot(evt) {
 
-
-				fromX = -window.innerWidth;
-				toX = 0;
-				if (this.index > currentPageIndex) {
-					
-					fromX = window.innerWidth;
-				}
-
-				let newBanner = aBanner(bannersData[this.index]);
-				newBanner.style.left=fromX+"px";
-				let parent = currentBanner.parentNode;
-				let childs = parent.childNodes;
-				parent.insertBefore(newBanner, childs[childs.length - 1]);
-				
-		
-
-				
-				moveBanner({
-					banner: newBanner,
-					fromX: fromX,
-					toX: toX,
-					speed: speed,
-					interval: interval,
-					fun: function (banner) {
-						currentBanner = banner;
-						checkAnimationEnd();
-					}
-				});
-
-
-				function checkAnimationEnd() {
-					animation--;
-					if (animation == 0)
-						check(dot);
-					let selector = dot.childNodes[1];
+					let selector = this.childNodes[1];
 					setStyles(selector, ["PageNavDotSelect"]);
+
+
+				}
+				function outDot(evt) {
+					if (this.checked == true)
+						return;
+					let selector = this.childNodes[1];
+					setStyles(selector, ["PageNavDotNormal"]);
+
+				}
+				let animation = 0;
+				function clickDot(evt) {
+					
+					if (animation)
+						return;
+					if (currentPageIndex == this.index)
+						return;
+
+					let dot = this;
+					check(this);
+					animation = 2;
+
+					let targetPos = window.innerWidth;
+					if (this.index > currentPageIndex) {
+
+						targetPos = -window.innerWidth;
+					}
+					let duration=500;
+					move(currentBanner, { fromX: 0, toX: targetPos, duration: duration },
+						function (banner) {
+							banner.parentNode.removeChild(banner);
+							animation--;
+						}
+					);
+
+
+
+					let beginPos = -window.innerWidth;
+					if (this.index > currentPageIndex) {
+
+						beginPos = window.innerWidth;
+					}
+
+					let newBanner = aBanner(bannersData[this.index]);
+					newBanner.style.left = beginPos + "px";
+					let parent = currentBanner.parentNode;
+					let childs = parent.childNodes;
+					parent.insertBefore(newBanner, childs[childs.length - 1]);
+
+
+
+					move(newBanner, { fromX: beginPos, toX: 0, duration: duration, },
+						function (banner) {
+							currentPageIndex = dot.index;
+							currentBanner = newBanner;
+							animation--;
+						}
+					);
+
+
+					function move(banner, data, fun) {
+						let { fromX, toX, duration } = data;
+						let startTime;
+
+						let reqAniRef=requestAnimationFrame(function (timestamp) {
+							startTime = timestamp;
+							update(timestamp);
+						});
+
+						function update(timestamp) {
+							let dist = toX - fromX;
+							let runTime = timestamp - startTime;
+							let progress = runTime / duration;
+							progress = Math.min(progress, 1);
+							banner.style.left = (fromX + dist * progress).toFixed(2) + 'px'
+							if (runTime < duration) { // if duration not met yet
+								reqAniRef=requestAnimationFrame(update);
+
+							} else {
+								
+								if (fun != undefined)
+									fun(banner);
+							}
+						}
+					}
+
+
 				}
 
-			}
 
-			function moveBanner(data) {
-				let { banner, speed, interval, fun, fromX, toX } = data;
-				var pos = fromX;
-				var id = setInterval(frame, interval);
-				function frame() {
-					if (posExceedTarget(pos,toX,speed)) {
-						pos=toX;
-						banner.style.left = pos + 'px';
-						clearInterval(id);
-						fun(banner);
-					} else {
-						pos += speed;
-						banner.style.left = pos + 'px';
-					}
+				for (let i = 0; i < bannersData.length; i++) {
+					let dotBack = aDiv({
+						onMouseover: overDot,
+						onMouseout: outDot,
+						onClick: clickDot,
+						styles: ["PageNavBack"], childs: [
+							aDiv({ styles: ["PageNavDot"] }),
+							aDiv({ styles: ["PageNavDotNormal"] })
+						]
+					});
+					dotBack.index = i;
+					pageDotArr.push(dotBack);
+					check(pageDotArr[0]);
 				}
-				function posExceedTarget(pos,target,speed)
-				{
-					if(speed<0)
-					{
-						if(pos<=target)return true;
-					}else if (speed>0)
-					{
-						if(pos>target) return true;
-					}
-					return false
-				}
-			}
-			for (let i = 0; i < bannersData.length; i++) {
-				let dotBack = aDiv({
-					onMouseover: overDot,
-					onMouseout: outDot,
-					onClick: clickDot,
-					styles: ["PageNavBack"], childs: [
-						aDiv({ styles: ["PageNavDot"] }),
-						aDiv({})
-					]
-				});
-				dotBack.index = i;
-				pageDotArr.push(dotBack);
-				check(pageDotArr[0]);
-			}
-			return pageDotArr;
-		})()
+				return pageDotArr;
+			})()
 
 	});
 
