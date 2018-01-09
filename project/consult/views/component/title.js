@@ -99,7 +99,8 @@ function buildPageDot(bannerArr) {
 
 
 		moveSimultaneously({
-			banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 500, fun: function () {
+			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 500,
+			fun: function () {
 
 				bannerBox.removeChild(bannerBox.currentBanner);
 				bannerBox.currentPageIndex = dot.index;
@@ -127,13 +128,16 @@ function check(pageDotArr, index) {
 
 	}
 }
+
 function moveSimultaneously(data) {
-	let { banners, dist, duration, fun } = data;
+	let { bannerBox, banners, dist, duration, fun } = data;
+
 	let startTime;
-	let reqAniRef = requestAnimationFrame(function (timestamp) {
+	bannerBox.aniID = requestAnimationFrame(function (timestamp) {
 		startTime = timestamp;
 		update(timestamp);
 	});
+	
 	function update(timestamp) {
 		let runTime = timestamp - startTime;
 		let progress = runTime / duration;
@@ -143,7 +147,7 @@ function moveSimultaneously(data) {
 			banner.style.left = (banner.fromX + dist * progress).toFixed(2) + 'px';
 		}
 		if (runTime < duration) {
-			reqAniRef = requestAnimationFrame(update);
+			bannerBox.aniID = requestAnimationFrame(update);
 		} else {
 			if (fun != undefined)
 				fun();
@@ -169,48 +173,53 @@ function aBannerBox(data) {
 			pageNav
 		],
 		onMouseover: function (evt) {
-			this.isMouseOver = true;
 			show(pageNav);
-			clearTimeout(wait);
-
 		},
 		onMouseout: function (evt) {
-			bannerBox.canScroll=true;
-			this.isMouseOver = false;
 			hide(pageNav);
-
 		}
 	});
-	
+
 	bannerBox.currentBanner = banner;
 	bannerBox.currentPageIndex = 0;
 	bannerBox.isBannerMoving = false;
 	bannerBox.isMouseOver = false;
-	bannerBox.canScroll = true;
-	let wait;
-	function beginWait() {
-		wait = setTimeout(() => {
-			startAutoScroll();
-		}, 3000);
-	}
-	// document.onmousemove = document.onkeypress = function () {
-	//     idleCounter = 0;
-	// };
-	let idle = setInterval(() => {
-		if (!bannerBox.canScroll)
+
+
+	let idle;
+	let idleCounter = 0;
+	idle = setInterval(() => {
+		if (bannerBox.isBannerMoving) {
+			idleCounter = 0;
 			return;
-		if (!bannerBox.isMouseOver) {
-			beginWait();
-			bannerBox.canScroll = false;
 		}
-	}, 100);
+		idleCounter += 1000;
+		if (idleCounter > 3000) {
+			startScroll();
+		}
+	}, 1000);
 
-	return bannerBox;
-	function startAutoScroll() {
+	function stopCountIdle() {
 
-		if (bannerBox.isMouseOver == true)
-			return;
+		clearInterval(idle);
+	}
 
+	window.onmousemove = window.onkeypress = function () {
+		idleCounter = 0;
+	};
+
+	window.addEventListener('blur', function () {
+		console.log('blur');
+		// cancelAnimationFrame(bannerBox.aniID);
+	}, false);
+
+	window.addEventListener('focus', function () {
+		console.log('focus');
+		// requestAnimationFrame(bannerBox.aniUpdate);
+	}, false);
+
+
+	function startScroll() {
 		bannerBox.isBannerMoving = true;
 		bannerBox.currentBanner.fromX = 0;
 
@@ -228,14 +237,16 @@ function aBannerBox(data) {
 		bannerBox.insertBefore(newBanner, childs[childs.length - 1]);
 
 		moveSimultaneously({
-			banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 2000, fun: function () {
+			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 2000, fun: function () {
 
 				bannerBox.removeChild(bannerBox.currentBanner);
 				bannerBox.currentPageIndex = index;
 				bannerBox.currentBanner = newBanner;
 				bannerBox.isBannerMoving = false;
-				beginWait();
+
 			}
 		});
 	}
+
+	return bannerBox;
 }
