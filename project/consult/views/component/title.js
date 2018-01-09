@@ -1,3 +1,5 @@
+
+
 function aTitle(data) {
 	let { childs } = data;
 	return aDiv({
@@ -151,13 +153,14 @@ function moveSimultaneously(data) {
 }
 
 function aBannerBox(data) {
+
 	let { bannerArr } = data;
 
 	let banner = aBanner(bannerArr[0]);
 	let pageNav = aPageNav(bannerArr);
 
 	//global-----------
-	let timer;
+
 	//-----------------
 	let bannerBox = aDiv({
 		styles: ["BannerBox"],
@@ -168,25 +171,46 @@ function aBannerBox(data) {
 		onMouseover: function (evt) {
 			this.isMouseOver = true;
 			show(pageNav);
-			clearTimeout(timer);
+			clearTimeout(wait);
+
 		},
 		onMouseout: function (evt) {
+			bannerBox.canScroll=true;
 			this.isMouseOver = false;
 			hide(pageNav);
-			timer = setTimeout(() => {
-				startAutoScroll();
-			}, 3000);
+
 		}
 	});
-
+	
 	bannerBox.currentBanner = banner;
 	bannerBox.currentPageIndex = 0;
 	bannerBox.isBannerMoving = false;
 	bannerBox.isMouseOver = false;
+	bannerBox.canScroll = true;
+	let wait;
+	function beginWait() {
+		wait = setTimeout(() => {
+			startAutoScroll();
+		}, 3000);
+	}
+	// document.onmousemove = document.onkeypress = function () {
+	//     idleCounter = 0;
+	// };
+	let idle = setInterval(() => {
+		if (!bannerBox.canScroll)
+			return;
+		if (!bannerBox.isMouseOver) {
+			beginWait();
+			bannerBox.canScroll = false;
+		}
+	}, 100);
+
 	return bannerBox;
 	function startAutoScroll() {
+
 		if (bannerBox.isMouseOver == true)
 			return;
+
 		bannerBox.isBannerMoving = true;
 		bannerBox.currentBanner.fromX = 0;
 
@@ -210,9 +234,7 @@ function aBannerBox(data) {
 				bannerBox.currentPageIndex = index;
 				bannerBox.currentBanner = newBanner;
 				bannerBox.isBannerMoving = false;
-				timer = setTimeout(() => {
-					startAutoScroll();
-				}, 3000);
+				beginWait();
 			}
 		});
 	}
