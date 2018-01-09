@@ -1,8 +1,11 @@
 keep scrolling when mouse cursor out  the banner area, stop immediatelly when mouse over
 	hide page navigator when mouse cursor out the banner 
+--stop scrolling when mouse move, lose focus or select other tab
 
 pull down menu animation
 
 hide pull down menu when window too narrow ,change to a button ,when press, menu slide from right
 
 add foot
+
+language button 

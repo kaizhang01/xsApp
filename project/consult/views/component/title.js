@@ -72,14 +72,14 @@ function buildPageDot(bannerArr) {
 
 	function clickDot(evt) {
 		let bannerBox = this.parentNode.parentNode;
-		if (bannerBox.isBannerMoving)
+		if (bannerBox.animation.bannerStatus === "moving")
 			return;
 		if (bannerBox.currentPageIndex == this.index)
 			return;
 
 		let dot = this;
 		check(pageDotArr, this.index);
-		bannerBox.isBannerMoving = true;
+		bannerBox.animation.bannerStatus = "moving";
 
 		bannerBox.currentBanner.fromX = 0;
 
@@ -100,12 +100,12 @@ function buildPageDot(bannerArr) {
 
 		moveSimultaneously({
 			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 500,
-			fun: function () {
+			fun: function (oldbanner) {
 
 				bannerBox.removeChild(bannerBox.currentBanner);
 				bannerBox.currentPageIndex = dot.index;
 				bannerBox.currentBanner = newBanner;
-				bannerBox.isBannerMoving = false;
+				bannerBox.animation.bannerStatus = "stop";
 			}
 		});
 
@@ -132,14 +132,17 @@ function check(pageDotArr, index) {
 function moveSimultaneously(data) {
 	let { bannerBox, banners, dist, duration, fun } = data;
 
-	let startTime;
-	bannerBox.aniID = requestAnimationFrame(function (timestamp) {
-		startTime = timestamp;
+	// let startTime;
+	bannerBox.animation.update = update;
+	bannerBox.animation.ID = requestAnimationFrame(function (timestamp) {
+		bannerBox.animation.startTime = timestamp;
+		// startTime = timestamp;
 		update(timestamp);
 	});
-	
+
 	function update(timestamp) {
-		let runTime = timestamp - startTime;
+
+		let runTime = timestamp - bannerBox.animation.startTime;
 		let progress = runTime / duration;
 		progress = Math.min(progress, 1);
 		for (let i = 0; i < banners.length; i++) {
@@ -147,13 +150,13 @@ function moveSimultaneously(data) {
 			banner.style.left = (banner.fromX + dist * progress).toFixed(2) + 'px';
 		}
 		if (runTime < duration) {
-			bannerBox.aniID = requestAnimationFrame(update);
+
+			bannerBox.animation.ID = requestAnimationFrame(update);
 		} else {
 			if (fun != undefined)
-				fun();
+				fun(banners[1]);
 		}
 	}
-
 }
 
 function aBannerBox(data) {
@@ -179,17 +182,17 @@ function aBannerBox(data) {
 			hide(pageNav);
 		}
 	});
-
+	bannerBox.animation = {};
 	bannerBox.currentBanner = banner;
 	bannerBox.currentPageIndex = 0;
-	bannerBox.isBannerMoving = false;
+	bannerBox.animation.bannerStatus = "stop";//moving,paused,
 	bannerBox.isMouseOver = false;
 
-
+	
 	let idle;
 	let idleCounter = 0;
 	idle = setInterval(() => {
-		if (bannerBox.isBannerMoving) {
+		if (bannerBox.animation.bannerStatus !== "stop") {
 			idleCounter = 0;
 			return;
 		}
@@ -210,17 +213,34 @@ function aBannerBox(data) {
 
 	window.addEventListener('blur', function () {
 		console.log('blur');
-		// cancelAnimationFrame(bannerBox.aniID);
+		if (bannerBox.animation.bannerStatus === "moving") {
+			bannerBox.animation.bannerStatus = "paused";
+			cancelAnimationFrame(bannerBox.animation.ID);
+			bannerBox.animation.escape = new Date().getTime();
+
+		}else if(bannerBox.animation.bannerStatus === "stop")
+		{
+			bannerBox.animation.bannerStatus="suspend";
+		}
+
 	}, false);
 
 	window.addEventListener('focus', function () {
 		console.log('focus');
-		// requestAnimationFrame(bannerBox.aniUpdate);
+		if (bannerBox.animation.bannerStatus === "paused") {
+			bannerBox.animation.escape = new Date().getTime() - bannerBox.animation.escape;
+			bannerBox.animation.startTime = bannerBox.animation.startTime + bannerBox.animation.escape;
+			requestAnimationFrame(bannerBox.animation.update);
+			bannerBox.animation.bannerStatus = "moving";
+		}
+		if(bannerBox.animation.bannerStatus==="suspend"){
+			bannerBox.animation.bannerStatus = "stop";
+		}
 	}, false);
 
 
 	function startScroll() {
-		bannerBox.isBannerMoving = true;
+		bannerBox.animation.bannerStatus = "moving";
 		bannerBox.currentBanner.fromX = 0;
 
 		let beginPos = document.body.clientWidth;
@@ -237,12 +257,13 @@ function aBannerBox(data) {
 		bannerBox.insertBefore(newBanner, childs[childs.length - 1]);
 
 		moveSimultaneously({
-			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 2000, fun: function () {
+			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 2000,
+			fun: function () {
 
 				bannerBox.removeChild(bannerBox.currentBanner);
 				bannerBox.currentPageIndex = index;
 				bannerBox.currentBanner = newBanner;
-				bannerBox.isBannerMoving = false;
+				bannerBox.animation.bannerStatus = "stop";
 
 			}
 		});

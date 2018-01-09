@@ -1,4 +1,5 @@
 
+
 addComponents(
 	[
 		'project/consult/views/component/head.js',
