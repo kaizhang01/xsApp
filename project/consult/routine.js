@@ -25,7 +25,7 @@ let main = {
 	},
 	handler: function (req, res) {
 		render.html(res, {
-			view: "./project/consult/views/welcome.js",
+			view: "/project/consult/views/welcome.js",
 		});
 	}
 };

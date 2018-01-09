@@ -6,7 +6,7 @@ addComponents(
 	], main);
 function main() {
 	aMain({
-		styles: ["Main"], childs: [
+		styles: ["WelcomeMain"], childs: [
 
 			aBannerBox({
 				bannerArr: [
@@ -28,32 +28,60 @@ function main() {
 				]
 
 			}),
+			aDetailBox({ head: { title: "About", link: "" }, content: [] }),
+			aDetailBox({ head: { title: "Service", link: "" }, content: [] }),
+			aDetailBox({ head: { title: "Client", link: "" }, content: [] }),
+			aDetailBox({ head: { title: "Contact", link: "" }, content: [] }),
+
 
 			aNavBar({
 				logo: "/project/consult/img/logo.png",
 				menu: [
-					{ item: "Service", dropDown: ["cyber security", "data Analyze", "website"] },
-					{ item: "Products", dropDown: ["cloud solution", "Investment"] },
-					{ item: "Stories", dropDown: ["Microsoft", "Google", "Amazon"] },
 					{ item: "About" },
+					{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
+					{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
+					{ item: "Contact" },
+
 				]
 			}),
 
 		]
 	});
 }
-
-
-
-
-
-function buildTitle() {
-	return [
-
-	];
-
+//head:{title:"Service" ,link:""}
+function aDetailBox(data) {
+	let { head, content } = data;
+	return aDiv({
+		styles: ["DetailBox"], childs: [
+			aDiv({
+				styles: ["DetailBoxHead"], childs: [
+					aText({ styles: ["DetailBoxHeadText"], txt: head.title }),
+					aLink({ styles: ["DetailBoxHeadLinkMore"], txt: "more >", href: head.link })
+				]
+			}),
+			aDiv({ styles: ["DetailBoxContent"], childs: content }),
+		]
+	});
 }
 
+
+
+function aboutDetail() {
+	return aDiv({ styles: ["DetailBox"] })
+
+}
+function serviceDetail() {
+
+
+}
+function clientDetail() {
+
+
+}
+function contactDetail() {
+
+
+}
 
 
 

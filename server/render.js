@@ -9,6 +9,7 @@ exports.html = function (res, paramObj) {
 <head>
 ${xs.addTitle(config.cfg.title)}
 ${xs.addLibs(config.cfg.libs)}
+${xs.addFonts(config.cfg.fonts)}
 ${xs.addCSSs(config.cfg.CSSs)}
 ${xs.addViewCss(view)}
 </head>
