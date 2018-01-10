@@ -1,5 +1,7 @@
-
-
+window.scrollY="300px";
+window.onscroll = function () {
+	console.log("scroll!"+window.scrollY);
+};
 addComponents(
 	[
 		'project/consult/views/component/head.js',
@@ -34,20 +36,33 @@ function main() {
 			aDetailBox({ head: { title: "Client", link: "" }, content: [] }),
 			aDetailBox({ head: { title: "Contact", link: "" }, content: [] }),
 
+			aStretchableNavBar({
+				stripData: { text: "Advisory hotline: 400-881-2881" },
+				navBarData: {
+					logo: "/project/consult/img/logo.png",
+					menu: [
+						{ item: "About" },
+						{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
+						{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
+						{ item: "Contact" },
 
-			aNavBar({
-				logo: "/project/consult/img/logo.png",
-				menu: [
-					{ item: "About" },
-					{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
-					{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
-					{ item: "Contact" },
-
-				]
+					]
+				}
 			}),
+			// aNavBar({
+			// 	logo: "/project/consult/img/logo.png",
+			// 	menu: [
+			// 		{ item: "About" },
+			// 		{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
+			// 		{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
+			// 		{ item: "Contact" },
+
+			// 	]
+			// }),
 
 		]
 	});
+	aMain({styles:["foot"]})
 }
 //head:{title:"Service" ,link:""}
 function aDetailBox(data) {

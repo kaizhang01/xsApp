@@ -1,5 +1,31 @@
+function aStretchableNavBar(data) {
+	let { stripData, navBarData } = data;
+	return aDiv({
+		styles: ["StretchableNavBar"], childs: [
+			aStrip(stripData),
+			aNavBar(navBarData),
+		]
+	});
 
-
+}
+function aStrip(data) {
+	let { text } = data;
+	return aDiv({
+		styles: ["Strip"], childs: [
+			aDiv({
+				styles: ["StripHeadBox"], childs: [
+					aText({ styles: ["StripHeadText"], txt: text }),
+				]
+			}),
+			aDiv({
+				styles: ["LanguageBox"], childs: [
+					aImg({styles:["LanguageImg"],src:"/project/consult/img/language-china.jpg"}),
+					aText({styles:["LanguageText"],txt:"China"})
+				]
+			}),
+		]
+	});
+}
 function aNavBar(data) {
 	let { logo, menu } = data;
 	return aDiv({
@@ -64,26 +90,26 @@ function aDropDownList(data) {
 			list.push(aDiv({
 				styles: ["DropDownItemBox"],
 				childs: [
-					aDiv({styles:["DropDownItemSelector"]}),
+					aDiv({ styles: ["DropDownItemSelector"] }),
 					aText({ styles: ["DropDownMenuText"], txt: text, type: "h2" }),
-					
+
 				],
-				onMouseover:dropDownItemMouseOver,
-				onMouseout:dropDownItemMouseOut
+				onMouseover: dropDownItemMouseOver,
+				onMouseout: dropDownItemMouseOut
 			}));
 
 		}
 		return list;
 
 		function dropDownItemMouseOver(evt) {
-			let selector=this.childNodes[0];
+			let selector = this.childNodes[0];
 			setStyles(selector, ["DropDownItemSelectorMouseover"]);
-			
+
 		}
 		function dropDownItemMouseOut(evt) {
-			let selector=this.childNodes[0];
+			let selector = this.childNodes[0];
 			setStyles(selector, ["DropDownItemSelector"]);
-			
+
 		}
 	}
 }
