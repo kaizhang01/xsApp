@@ -62,7 +62,7 @@ function main() {
 
 		]
 	});
-	aMain({styles:["foot"]})
+	// aMain({styles:["foot"]})
 }
 //head:{title:"Service" ,link:""}
 function aDetailBox(data) {
