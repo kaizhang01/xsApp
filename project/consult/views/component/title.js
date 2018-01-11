@@ -199,6 +199,7 @@ function aBannerBox(data) {
 		idleCounter += 1000;
 		if (idleCounter > 3000) {
 			startScroll();
+			idleCounter=0;
 		}
 	}, 1000);
 
@@ -257,7 +258,7 @@ function aBannerBox(data) {
 		bannerBox.insertBefore(newBanner, childs[childs.length - 1]);
 
 		moveSimultaneously({
-			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 2000,
+			bannerBox: bannerBox, banners: [newBanner, bannerBox.currentBanner], dist: 0 - beginPos, duration: 500,
 			fun: function () {
 
 				bannerBox.removeChild(bannerBox.currentBanner);
