@@ -1,7 +1,7 @@
 
 var mongoose = require('mongoose');
-var gallerySchema = new mongoose.Schema({
-	name: String,
-	img: String
+var UISchema = new mongoose.Schema({
+	USA: String,
+	CHN: String
 });
-exports.Gallery = mongoose.model("Gallery", gallerySchema,"gallery");
+exports.UI = mongoose.model("UI", UISchema,"UI");

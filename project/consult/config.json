@@ -6,7 +6,7 @@
 	,"libs": ["/lib/common.js"]
 	,"fonts": ["https://fonts.googleapis.com/css?family=Bungee|Indie+Flower"]
 	,"routine":"../project/consult/routine.js"
-	,"dbName":"mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb"
-	,"dbName2":"mongodb://localhost/appdb"
+	,"dbName2":"mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb"
+	,"dbName":"mongodb://localhost/appdb"
 	
 }

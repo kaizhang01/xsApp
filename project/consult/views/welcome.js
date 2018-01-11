@@ -1,11 +1,9 @@
-window.scrollY="300px";
-window.onscroll = function () {
-	console.log("scroll!"+window.scrollY);
-};
+
 addComponents(
 	[
 		'project/consult/views/component/head.js',
-		'project/consult/views/component/title.js'
+		'project/consult/views/component/title.js',
+		'project/consult/views/component/foot.js'
 	], main);
 function main() {
 	aMain({
@@ -35,6 +33,7 @@ function main() {
 			aDetailBox({ head: { title: "Service", link: "" }, content: [] }),
 			aDetailBox({ head: { title: "Client", link: "" }, content: [] }),
 			aDetailBox({ head: { title: "Contact", link: "" }, content: [] }),
+			aFoot({tradeMark:"All Rights Reserver © INFOBIZ"}),
 
 			aStretchableNavBar({
 				stripData: { text: "Advisory hotline: 400-881-2881" },
@@ -49,20 +48,12 @@ function main() {
 					]
 				}
 			}),
-			// aNavBar({
-			// 	logo: "/project/consult/img/logo.png",
-			// 	menu: [
-			// 		{ item: "About" },
-			// 		{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
-			// 		{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
-			// 		{ item: "Contact" },
-
-			// 	]
-			// }),
+		
 
 		]
 	});
-	// aMain({styles:["foot"]})
+	
+	
 }
 //head:{title:"Service" ,link:""}
 function aDetailBox(data) {
@@ -82,22 +73,6 @@ function aDetailBox(data) {
 
 
 
-function aboutDetail() {
-	return aDiv({ styles: ["DetailBox"] })
-
-}
-function serviceDetail() {
-
-
-}
-function clientDetail() {
-
-
-}
-function contactDetail() {
-
-
-}
 
 
 

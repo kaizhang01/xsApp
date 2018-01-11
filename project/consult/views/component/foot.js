@@ -1,9 +1,10 @@
 function aFoot(data) {
-	aMain({
-		styles: ["Title", "Title-End"],
+	let{tradeMark}=data;
+	return aDiv({
+		styles: ["Foot"],
 		childs: [
 			aText({
-				txt: "Trademark DrawApp 2018",
+				txt: tradeMark,
 				styles: ["TradeMark"]
 			}),
 		]

@@ -147,7 +147,7 @@ function moveSimultaneously(data) {
 		progress = Math.min(progress, 1);
 		for (let i = 0; i < banners.length; i++) {
 			const banner = banners[i];
-			banner.style.left = (banner.fromX + dist * progress).toFixed(2) + 'px';
+			banner.style.left = (banner.fromX + dist * progress) + 'px';
 		}
 		if (runTime < duration) {
 
@@ -212,7 +212,7 @@ function aBannerBox(data) {
 	};
 
 	window.addEventListener('blur', function () {
-		console.log('blur');
+// 		console.log('blur');
 		if (bannerBox.animation.bannerStatus === "moving") {
 			bannerBox.animation.bannerStatus = "paused";
 			cancelAnimationFrame(bannerBox.animation.ID);
@@ -226,7 +226,7 @@ function aBannerBox(data) {
 	}, false);
 
 	window.addEventListener('focus', function () {
-		console.log('focus');
+// 		console.log('focus');
 		if (bannerBox.animation.bannerStatus === "paused") {
 			bannerBox.animation.escape = new Date().getTime() - bannerBox.animation.escape;
 			bannerBox.animation.startTime = bannerBox.animation.startTime + bannerBox.animation.escape;

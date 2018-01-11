@@ -12,13 +12,6 @@
     width: 100%;
 }
 
-.Title-End {
-    display: flex;
-    align-items: center;
-    margin-top: 200px;
-    height: 30px;
-}
-
 .Title-mainTxt {
     color: #f8f6f6;
     font-size: 40px;

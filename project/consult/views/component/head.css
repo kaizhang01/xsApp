@@ -109,8 +109,7 @@
 	flex-direction: column;
 	position: fixed;
 	width: 100%;
-	top: 0;
-	left:0;
+	box-shadow: 0 1px 5px #3f3f3f;
 }
 
 .Strip {
@@ -135,11 +134,21 @@
 }
 
 .LanguageBox {
+	background-color: transparent;
 	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 0 30px;
+}
+.LanguageBoxMouseOver{
+	background-color: #848484;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 30px;
+	cursor: pointer;
 }
 /* .LanguageImgBox{
 	height: 100%
