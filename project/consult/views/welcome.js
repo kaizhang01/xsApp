@@ -1,11 +1,21 @@
 
-addComponents(
-	[
-		'project/consult/views/component/head.js',
-		'project/consult/views/component/title.js',
-		'project/consult/views/component/foot.js'
-	], main);
+
+buildLanguageMap({
+	"About": undefined,
+	"Service": undefined,
+	"Client": undefined,
+	"Contact": undefined
+}, function () {
+	addComponents(
+		[
+			'project/consult/views/component/head.js',
+			'project/consult/views/component/title.js',
+			'project/consult/views/component/foot.js'
+		], main);
+});
+
 function main() {
+
 	aMain({
 		styles: ["WelcomeMain"], childs: [
 
@@ -29,31 +39,31 @@ function main() {
 				]
 
 			}),
-			aDetailBox({ head: { title: "About", link: "" }, content: [] }),
-			aDetailBox({ head: { title: "Service", link: "" }, content: [] }),
-			aDetailBox({ head: { title: "Client", link: "" }, content: [] }),
-			aDetailBox({ head: { title: "Contact", link: "" }, content: [] }),
-			aFoot({tradeMark:"All Rights Reserver © INFOBIZ"}),
+			aDetailBox({ head: { title: UIText("About"), link: "" }, content: [] }),
+			aDetailBox({ head: { title: UIText("Service"), link: "" }, content: [] }),
+			aDetailBox({ head: { title: UIText("Client"), link: "" }, content: [] }),
+			aDetailBox({ head: { title: UIText("Contact"), link: "" }, content: [] }),
+			aFoot({ tradeMark: "All Rights Reserver © INFOBIZ" }),
 
 			aStretchableNavBar({
 				stripData: { text: "Advisory hotline: 400-881-2881" },
 				navBarData: {
 					logo: "/project/consult/img/logo.png",
 					menu: [
-						{ item: "About" },
-						{ item: "Service", dropDown: ["cyber security", "data Analyze", "website design"] },
-						{ item: "Client", dropDown: ["Microsoft", "Google", "Amazon"] },
-						{ item: "Contact" },
+						{ item: UIText("About") },
+						{ item: UIText("Service"), dropDown: ["cyber security", "data Analyze", "website design"] },
+						{ item: UIText("Client"), dropDown: ["Microsoft", "Google", "Amazon"] },
+						{ item: UIText("Contact") },
 
 					]
 				}
 			}),
-		
+
 
 		]
 	});
-	
-	
+
+
 }
 //head:{title:"Service" ,link:""}
 function aDetailBox(data) {

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const assert = require('assert');
+const config =require('./config.js');
 
 exports.reqFile = function (reqPath) {
 	if (reqPath.indexOf('.') == -1)
@@ -81,7 +82,8 @@ exports.addData = function (serverData) {
 		return "";
 	let str = `<script>`;
 	str += `let viewName= ${JSON.stringify(serverData.view)};\n`;
-	str += `let serverData= ${JSON.stringify(serverData.data)};`;
+	str += `let serverData= ${JSON.stringify(serverData.data)};\n`;
+	str+= `let UIlanguage=${JSON.stringify(config.cfg.language)};`;
 	str += `</script>`;
 	return str;
 };

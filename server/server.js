@@ -28,7 +28,6 @@ exports.startServer = () => {
 	console.log(`Server running at  ${port}`);
 	server.on("close", function () {
 		console.log("server stop");
-		// db.clean();
 		config.clean();
 	});
 	

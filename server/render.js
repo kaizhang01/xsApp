@@ -2,7 +2,7 @@ const config = require('./config.js');
 
 const xs = require('./xs.js');
 exports.html = function (res, paramObj) {
-	let { data, view } = paramObj;
+	let { data, view ,language} = paramObj;
 	res.setHeader('Content-type', "text/html;charset=utf8");
 	var html = `<!DOCTYPE html>
 <html>

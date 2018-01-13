@@ -1,3 +1,4 @@
+
 function aStretchableNavBar(data) {
 	let { stripData, navBarData } = data;
 	let div = aDiv({
@@ -32,9 +33,9 @@ function aStretchableNavBar(data) {
 			div.animation.dist = div.animation.posY_to - div.animation.posY_from;
 			update(timeStamp);
 		});
-		function update(timestamp) {
+		function update(timeStamp) {
 			div.animation.status = "moving";
-			let runTime = timestamp - div.animation.startTime;
+			let runTime = timeStamp - div.animation.startTime;
 			let progress = runTime / duration;
 			progress = Math.min(progress, 1);
 			div.style.top = (div.animation.posY_from + div.animation.dist * progress) + "px";
@@ -55,6 +56,7 @@ function aStretchableNavBar(data) {
 	}
 	return div;
 }
+
 function aStrip(data) {
 	let { text } = data;
 	let StripHeadBox = aDiv({
@@ -62,13 +64,25 @@ function aStrip(data) {
 			aText({ styles: ["StripHeadText"], txt: text }),
 		]
 	});
+
+	let ImgSrc;
+	let languageText;
+	if (UIlanguage === "CHN") {
+		ImgSrc = "/project/consult/img/language-USA.jpg";
+		languageText = "United States";
+	}
+	else if (UIlanguage === "USA") {
+		ImgSrc = "/project/consult/img/language-CHN.jpg";
+		languageText = "China";
+	}
 	let LanguageBox = aDiv({
 		styles: ["LanguageBox"], childs: [
-			aImg({ styles: ["LanguageImg"], src: "/project/consult/img/language-china.jpg" }),
-			aText({ styles: ["LanguageText"], txt: "China" })
+			aImg({ styles: ["LanguageImg"], src: ImgSrc }),
+			aText({ styles: ["LanguageText"], txt: languageText })
 		],
 		onMouseover: languageBoxMouseOver,
-		onMouseout: languageBoxMouseOut
+		onMouseout: languageBoxMouseOut,
+		onClick: languageBoxOnClick
 
 	});
 	function languageBoxMouseOver() {
@@ -76,6 +90,17 @@ function aStrip(data) {
 	}
 	function languageBoxMouseOut() {
 		setStyles(LanguageBox, ["LanguageBox"]);
+	}
+	function languageBoxOnClick() {
+		if (UIlanguage === "CHN") {
+			changeLanguage("USA");
+		}
+		else if (UIlanguage === "USA") {
+			changeLanguage("CHN");
+		}
+
+
+
 	}
 	return aDiv({
 		styles: ["Strip"], childs: [
@@ -123,14 +148,26 @@ function aMenuItem(data) {
 	});
 	function MenuItemMouseOver(evt) {
 		setStyles(this, ["NavMenuItemBoxMouseover"]);
-		if (dropDownList != undefined)
+		if (dropDownList != undefined) {
 			show(dropDownList);
+			// dropDownList.animate("pullDown", function () {
+
+			// });
+
+		}
+
 	}
 	function MenuItemMouseOut(evt) {
 		setStyles(this, ["NavMenuItemBox"]);
-		if (dropDownList != undefined)
+		if (dropDownList != undefined) {
+			// dropDownList.animate("pullUp", function () {
 			hide(dropDownList);
+			// });
+		}
+
 	}
+
+
 }
 
 
@@ -138,15 +175,20 @@ function aDropDownList(data) {
 	let { dropDown } = data;
 	if (dropDown == undefined)
 		return undefined;
-	return aDiv({
-		styles: ["DropDownBox"], childs: buildDropDownList()
+	let dropDownBoxConnector = aDiv({
+		styles: ["DropDownBoxConnector"], childs: [
+			aDiv({ styles: ["DropDownBox"], childs: buildDropDownList() })
+		]
+
 
 	});
+	new Animation(dropDownBoxConnector);
+	return dropDownBoxConnector;
 	function buildDropDownList() {
-		let list = [];
+		let element = [];
 		for (let i = 0; i < dropDown.length; i++) {
 			const text = dropDown[i];
-			list.push(aDiv({
+			element.push(aDiv({
 				styles: ["DropDownItemBox"],
 				childs: [
 					aDiv({ styles: ["DropDownItemSelector"] }),
@@ -158,7 +200,7 @@ function aDropDownList(data) {
 			}));
 
 		}
-		return list;
+		return element;
 
 		function dropDownItemMouseOver(evt) {
 			let selector = this.childNodes[0];

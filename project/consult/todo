@@ -1,5 +1,5 @@
 
---language button , switch between two language ,use the database
+
 --pull down menu animation
 --adjust size on mobile programmatically 
 	hide pull down menu when window too narrow ,change to a button ,when press, menu slide from right
@@ -11,3 +11,9 @@ ok========================================
 	!!stop scrolling when user move mouse or click window or lost focus(include change to other tab or change to other window) 
 --add foot
 --hideable strip that display brief information
+--change img use css**not very flexible,css change txt not possible
+//language----
+--language button , switch between two language ,use the database
+
+//effect---
+box shadow except top

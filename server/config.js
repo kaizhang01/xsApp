@@ -1,6 +1,6 @@
-const app=require('./app.js');
+const app = require('./app.js');
 const fs = require('fs');
-const assert=require('assert');
+const assert = require('assert');
 
 exports.read = function (files) {
 	exports.cfg={};
@@ -20,7 +20,7 @@ exports.read = function (files) {
 
 
 };
-exports.clean = function clean(){
-	exports.cfg=null;
+exports.clean = function clean() {
+	exports.cfg = null;
 };
 
