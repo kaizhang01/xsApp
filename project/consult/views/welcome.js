@@ -72,7 +72,7 @@ function aDetailBox(data) {
 		styles: ["DetailBox"], childs: [
 			aDiv({
 				styles: ["DetailBoxHead"], childs: [
-					aText({ styles: ["DetailBoxHeadText"], txt: head.title }),
+					aText({ styles: ["DetailBoxHeadText"], txt: head.title,type: "h2"}),
 					aLink({ styles: ["DetailBoxHeadLinkMore"], txt: "more >", href: head.link })
 				]
 			}),

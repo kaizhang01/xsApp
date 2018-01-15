@@ -21,7 +21,7 @@ db.connectDb(config.cfg.dbName);
 let main = function (req, res) {
 	render.html(res, {
 		view: "/project/consult/views/welcome.js",
-		
+
 	});
 };
 
@@ -35,18 +35,21 @@ let changeLanguage = function (req, res) {
 	fs.writeFile('./project/consult/language.json', JSON.stringify({ language: res.b_Id }), (err) => {
 		if (err) throw err;
 		console.log('language setting has been saved!');
-		config.cfg.language=res.b_Id;
+		config.cfg.language = res.b_Id;
 		res.end(res.b_Id);
 	});
 };
 
 
 function getUIText(req, res) {
-	console.log("getUIText" + res.b_Id);
+	console.log("getUIText--" + res.b_Id);
 	db.UI.findOne({ "USA": res.b_Id }, function (err, text) {
-		assert(err==null,err);
+		assert(err == null, err);
 		// console.log(text.CHN) ;
-		res.end(text[config.cfg.language]);
+		if (text == null)
+			res.end("no define in db(ui)");
+		else
+			res.end(text[config.cfg.language]);
 	});
 
 }

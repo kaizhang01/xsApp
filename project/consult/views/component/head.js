@@ -134,37 +134,81 @@ function buildNavMenuHorizon(menu) {
 	}
 	return NavMenu;
 }
+
 function aMenuItem(data) {
 	let { item, dropDown } = data;
-	let dropDownList = aDropDownList({ dropDown: dropDown });
-	return aDiv({
-		styles: ["NavMenuItemBox"],
-		childs: [
-			aText({ txt: item, type: "h2", styles: ["NavMenuTxt"] }),
-			dropDownList
-		],
-		onMouseover: MenuItemMouseOver,
-		onMouseout: MenuItemMouseOut
-	});
-	function MenuItemMouseOver(evt) {
-		setStyles(this, ["NavMenuItemBoxMouseover"]);
-		if (dropDownList != undefined) {
-			show(dropDownList);
-			// dropDownList.animate("pullDown", function () {
 
-			// });
+	let MenuItemBox=aDiv({
+		styles: ["NavMenuItemBox"], childs: [
+			aText({ txt: item, type: "h2", styles: ["NavMenuTxt"] }),
+			aDiv({
+				styles: ["NavMenuItemResArea"],
+				onMouseover: MenuItemMouseOver,
+				onMouseout: MenuItemMouseOut
+			}),
+		]
+	});
+	MenuItemBox.pulldownShow = false;
+	let dropDownMenu = aDropDownList({ dropDown: dropDown });
+	if (dropDownMenu != undefined)
+		dropDownMenu.animation = {};
+	return aDiv({
+		styles: ["PullDownMenuBox"],
+		childs: [
+			
+			MenuItemBox,
+			dropDownMenu
+		],
+
+	});
+
+	function MenuItemMouseOver(evt) {
+		let MenuItemBox = this.parentNode;
+		let dropDownMenu = MenuItemBox.parentNode.childNodes[1];
+		if (dropDownMenu != undefined) {
+			if (MenuItemBox.pulldownShow == false) {
+				show(dropDownMenu);
+				let dropDownMenuBox = dropDownMenu.childNodes[0];
+				let rect = dropDownMenuBox.getBoundingClientRect();
+				let height = rect.height + 5;
+				animate(dropDownMenu, {
+					property: "height",
+					unit: "px",
+					from: 0,
+					to: height,
+					duration: 200,
+				});
+				MenuItemBox.pulldownShow = true;
+			}
 
 		}
+		setStyles(MenuItemBox, ["NavMenuItemBoxMouseover"]);
 
+		evt.stopPropagation();
 	}
 	function MenuItemMouseOut(evt) {
-		setStyles(this, ["NavMenuItemBox"]);
-		if (dropDownList != undefined) {
-			// dropDownList.animate("pullUp", function () {
-			hide(dropDownList);
+		let MenuItemBox = this.parentNode;
+		let dropDownMenu = MenuItemBox.parentNode.childNodes[1];
+
+		if (dropDownMenu != undefined) {
+			let dropDownMenuResArea = dropDownMenu.childNodes[0].childNodes[0];
+			let dropRect = dropDownMenuResArea.getBoundingClientRect();
+			if (mouseIsInRect(evt.clientX, evt.clientY,
+				{
+					top: dropRect.top - 1.5,
+					bottom: dropRect.bottom,
+					left: dropRect.left,
+					right: dropRect.right
+				})) {
+				return;
+			}
+			// dropDownMenu.animate("pullUp", function () {
+			hide(dropDownMenu);
+			MenuItemBox.pulldownShow=false;
 			// });
 		}
-
+		setStyles(MenuItemBox, ["NavMenuItemBox"]);
+		evt.stopPropagation();
 	}
 
 
@@ -175,42 +219,93 @@ function aDropDownList(data) {
 	let { dropDown } = data;
 	if (dropDown == undefined)
 		return undefined;
-	let dropDownBoxConnector = aDiv({
+	return aDiv({
 		styles: ["DropDownBoxConnector"], childs: [
-			aDiv({ styles: ["DropDownBox"], childs: buildDropDownList() })
+			aDiv({ styles: ["DropDownBox"], childs: buildDropDownList() }),
+
 		]
 
 
 	});
-	new Animation(dropDownBoxConnector);
-	return dropDownBoxConnector;
+
+
 	function buildDropDownList() {
 		let element = [];
+		element.push(aDiv({
+			styles: ["dropDownBoxResArea"],
+			// onMouseover: dropDownItemMouseOver,
+			onMouseout: dropDownBoxMouseOut
+		}));
+		function dropDownBoxMouseOut(evt) {
+// 			console.log("dropDownBox")
+			let dropDownMenu = this.parentNode.parentNode;
+			let MenuItemBox = dropDownMenu.parentNode.childNodes[0];
+			let rect = this.getBoundingClientRect();
+
+			if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+
+				return;
+			}
+
+			let menuItemResArea = this.parentNode.parentNode.parentNode.childNodes[0].childNodes[1];
+			rect = menuItemResArea.getBoundingClientRect();
+			if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+				return;
+			}
+// 			console.log("out- dropdownbox ");
+			hide(dropDownMenu);
+			MenuItemBox.pulldownShow=false;
+			setStyles(MenuItemBox, ["NavMenuItemBox"]);
+			evt.stopPropagation();
+		}
 		for (let i = 0; i < dropDown.length; i++) {
 			const text = dropDown[i];
-			element.push(aDiv({
-				styles: ["DropDownItemBox"],
-				childs: [
-					aDiv({ styles: ["DropDownItemSelector"] }),
-					aText({ styles: ["DropDownMenuText"], txt: text, type: "h2" }),
+			element.push(
+				aDiv({
+					styles: ["DropDownItemBox"],
+					childs: [
+						aDiv({ styles: ["DropDownItemSelector"] }),
+						aText({ styles: ["DropDownMenuText"], txt: text, type: "h2" }),
+						aDiv({
+							styles: ["dropDownItemBoxResArea"],
+							onMouseover: dropDownItemMouseOver,
+							onMouseout: dropDownItemMouseOut
+						})
+					],
 
-				],
-				onMouseover: dropDownItemMouseOver,
-				onMouseout: dropDownItemMouseOut
-			}));
+				}));
 
 		}
 		return element;
 
 		function dropDownItemMouseOver(evt) {
-			let selector = this.childNodes[0];
-			setStyles(selector, ["DropDownItemSelectorMouseover"]);
-
+			let selectsignal = this.parentNode.childNodes[0];
+			setStyles(selectsignal, ["DropDownItemSelectorMouseover"]);
+			evt.stopPropagation();
 		}
 		function dropDownItemMouseOut(evt) {
-			let selector = this.childNodes[0];
-			setStyles(selector, ["DropDownItemSelector"]);
+// 			console.log("dropDownItem");
+			let selectsignal = this.parentNode.childNodes[0];
+			setStyles(selectsignal, ["DropDownItemSelector"]);
 
+			let dropDownMenu = this.parentNode.parentNode.parentNode;
+			let dropDownMenuResArea = this.parentNode.parentNode.childNodes[0];
+			let rect = dropDownMenuResArea.getBoundingClientRect();
+
+			if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+				return;
+			}
+			let menuItemResArea = this.parentNode.parentNode.parentNode.parentNode.childNodes[0].childNodes[1];
+			rect = menuItemResArea.getBoundingClientRect();
+			if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+				return;
+			}
+// 			console.log("out dropdownitem ");
+			hide(dropDownMenu);
+			let MenuItemBox = this.parentNode.parentNode.parentNode.parentNode.childNodes[0];
+			MenuItemBox.pulldownShow=false;
+			setStyles(MenuItemBox, ["NavMenuItemBox"]);
+			evt.stopPropagation();
 		}
 	}
 }
