@@ -1,19 +1,41 @@
 
+--1/16/2018-- jump to different page via a linkMap
+--get content language text use Post Method
 
---pull down menu animation
 --adjust size on mobile programmatically 
-	hide pull down menu when window too narrow ,change to a button ,when press, menu slide from right
-
+    hide top menu when window too narrow ,change to a button ,when press, menu slide from right
+--achieve a object pool use to smooth animation (not smooth on mobile now)
 ok========================================
---keep scrolling when mouse cursor out  the banner area, stop immediatelly when mouse over
-	hide page navigator when mouse cursor out the banner 
-	stop scrolling when mouse move, lose focus or select other tab
-	!!stop scrolling when user move mouse or click window or lost focus(include change to other tab or change to other window) 
+//feature---------------------------------
+*client*
+--use pure javascript and css -- no template, no new syntax
+--send basic html with data describe needed html info
+  and then build html entire on client side
+  dynamic include other js as view component
+
+*server*
+--use pure nodejs, no other package needed
+--support restful routine  
+--seperate routine to different files
+
+*data*
+-- use mongoose connect app and database
+-- use mlab free mongodb service
+*deploy*
+-- deploy to heroku use github
+//function -------------------------------
+-- 1/16/2018-- display todo list when press logo--1/16/2018
+//layout----------------------------------
 --add foot
 --hideable strip that display brief information
 --change img use css**not very flexible,css change txt not possible
-//language----
+
+//language--------------------------------
 --language button , switch between two language ,use the database
 
-//effect---
-box shadow except top
+//effect----------------------------------
+--box shadow except top
+--pull down menu animation
+--keep rolling when mouse cursor out  the banner area, stop immediatelly when mouse over
+  hide page navigator when mouse cursor out the banner 
+  !!stop rolling when user move mouse or click window or lost focus(include change to other tab or change to other window) 

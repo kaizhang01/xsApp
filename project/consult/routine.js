@@ -25,10 +25,6 @@ let main = function (req, res) {
 	});
 };
 
-// let translate = function (req, res) {
-// 	console.log("translate" + res.b_Id);
-// };
-
 let changeLanguage = function (req, res) {
 	console.log("changeLanguage" + res.b_Id);
 
@@ -42,7 +38,7 @@ let changeLanguage = function (req, res) {
 
 
 function getUIText(req, res) {
-	console.log("getUIText--" + res.b_Id);
+	// console.log("getUIText--" + res.b_Id);
 	db.UI.findOne({ "USA": res.b_Id }, function (err, text) {
 		assert(err == null, err);
 		// console.log(text.CHN) ;
@@ -53,9 +49,20 @@ function getUIText(req, res) {
 	});
 
 }
+function displayTodoList(req,res){
+    fs.readFile("./project/consult/todo", function (err, data) {
+		if (err) {
+			res.statusCode = 500;
+			res.end(`Error: can't read the file: ${err}.`);
+		} else {
+			res.end(data);
+		}
+	});
+}
 exports.subRoutine = {
 	"": main,
 	"changeLanguage": changeLanguage,
-	"getUIText": getUIText
+    "getUIText": getUIText,
+    "todo":displayTodoList
 };
 

@@ -23,7 +23,7 @@ exports.returnFile=(res,pathname, data)=> {
 	res.end(data);
 };
 
-exports. handle=(req,res)=> {
+exports.handle=(req,res)=> {
 	let fileFullPath;
 	if(req.parsedPath=="/favicon.ico")
 	{
