@@ -71,9 +71,21 @@ function buildPageDot(bannerArr) {
     function outDot(evt) {
         let dotRoot = evt.currentTarget.parentNode;
         let selector = dotRoot.childNodes[1];
+
+        let bannerBox = dotRoot.parentNode.parentNode;
+        let rect = bannerBox.getBoundingClientRect();
+        if (!mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+            let pageNav = evt.currentTarget.parentNode.parentNode;
+            hide(pageNav);
+        
+        }
+
         if (dotRoot.checked == true)
             return;
         setStyles(selector, ["PageNavDotNormal"]);
+
+   
+
 
     }
 
