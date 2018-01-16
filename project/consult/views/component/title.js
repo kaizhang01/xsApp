@@ -42,17 +42,20 @@ function aPageNav(bannerArr) {
 function buildPageDot(bannerArr) {
     let pageDotArr = [];
     for (let i = 0; i < bannerArr.length; i++) {
-        let dotBack = aDiv({
-            onMouseover: overDot,
-            onMouseout: outDot,
-            onClick: clickDot,
-            styles: ["PageNavBack"], childs: [
+        let dotRoot = aDiv({
+            styles: ["PageNavDotRoot"], childs: [
                 aDiv({ styles: ["PageNavDot"] }),
-                aDiv({ styles: ["PageNavDotNormal"] })
+                aDiv({ styles: ["PageNavDotNormal"] }),
+                aDiv({
+                    styles: ["DotResArea"],
+                    onMouseover: overDot,
+                    onMouseout: outDot,
+                    onClick: clickDot,
+                })
             ]
         });
-        dotBack.index = i;
-        pageDotArr.push(dotBack);
+        dotRoot.index = i;
+        pageDotArr.push(dotRoot);
         check(pageDotArr, 0);
 
     }
@@ -60,39 +63,41 @@ function buildPageDot(bannerArr) {
 
     function overDot(evt) {
 
-        let selector = this.childNodes[1];
+        let selector = evt.currentTarget.parentNode.childNodes[1];
         setStyles(selector, ["PageNavDotSelect"]);
 
 
     }
     function outDot(evt) {
-        if (this.checked == true)
+        let dotRoot = evt.currentTarget.parentNode;
+        let selector = dotRoot.childNodes[1];
+        if (dotRoot.checked == true)
             return;
-        let selector = this.childNodes[1];
         setStyles(selector, ["PageNavDotNormal"]);
 
     }
 
     function clickDot(evt) {
-        let bannerBox = this.parentNode.parentNode;
+        let dotRoot = evt.currentTarget.parentNode;
+        let selector = evt.currentTarget.childNodes[1];
+        let bannerBox = dotRoot.parentNode.parentNode;
         if (bannerBox.animation.bannerStatus === "moving")
             return;
-        if (bannerBox.currentPageIndex == this.index)
+        if (bannerBox.currentPageIndex == dotRoot.index)
             return;
 
-        let dot = this;
-        check(pageDotArr, this.index);
+        check(pageDotArr, dotRoot.index);
         bannerBox.animation.bannerStatus = "moving";
 
         bannerBox.currentBanner.fromX = 0;
 
 
         let beginPos = -document.body.clientWidth;//not equal to window.innerWidth
-        if (this.index > bannerBox.currentPageIndex) {
+        if (dotRoot.index > bannerBox.currentPageIndex) {
             beginPos *= -1;
         }
 
-        let newBanner = aBanner(bannerArr[this.index]);
+        let newBanner = aBanner(bannerArr[dotRoot.index]);
         newBanner.fromX = beginPos;
         newBanner.style.left = beginPos + "px";
 
@@ -106,7 +111,7 @@ function buildPageDot(bannerArr) {
             fun: function (oldbanner) {
 
                 bannerBox.removeChild(bannerBox.currentBanner);
-                bannerBox.currentPageIndex = dot.index;
+                bannerBox.currentPageIndex = dotRoot.index;
                 bannerBox.currentBanner = newBanner;
                 bannerBox.animation.bannerStatus = "stop";
             }
@@ -182,6 +187,10 @@ function aBannerBox(data) {
             show(pageNav);
         },
         onMouseout: function (evt) {
+            let rect = evt.currentTarget.getBoundingClientRect();
+            if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+                return;
+            }
             hide(pageNav);
         }
     });
