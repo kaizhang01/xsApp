@@ -1,14 +1,14 @@
 
 addComponents([
-    'project/consult/views/component/head.js',
     'project/consult/views/component/title.js',
-    'project/consult/views/component/foot.js'
-], main);
-
-function main() {
+    'project/consult/views/share.js',
+], function () {
+    addHead();
     aMain({
         styles: ["introduceMain"], childs: [
-            aBanner({ img: "",title:"Samll Step , Big Idea",subtitle:"",style:"fixedBanner"})
+            aFixedBanner({ img: "", title: "Small Step , Big Idea", subtitle: "", styles: ["fixedBanner"] })
         ]
     });
-}
+    addFoot();
+});
+

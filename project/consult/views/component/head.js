@@ -142,11 +142,12 @@ function aMenuItem(data) {
 
     let MenuItemBox = aDiv({
         styles: ["NavMenuItemBox"], childs: [
-            aText({ txt: item, type: "h2", styles: ["NavMenuTxt"] }),
+            aText({ txt: item.name,t:item.t, type: "h2", styles: ["NavMenuTxt"] }),
             aDiv({
                 styles: ["NavMenuItemResArea"],
                 onMouseover: MenuItemMouseOver,
-                onMouseout: MenuItemMouseOut
+                onMouseout: MenuItemMouseOut,
+                onClick: MenuItemClick
             }),
         ]
     });
@@ -157,13 +158,14 @@ function aMenuItem(data) {
     return aDiv({
         styles: ["PullDownMenuBox"],
         childs: [
-
             MenuItemBox,
             dropDownMenu
         ],
 
     });
-
+    function MenuItemClick(evt) {
+        checkAction(item);
+    }
     function MenuItemMouseOver(evt) {
         let MenuItemBox = evt.currentTarget.parentNode;
         let dropDownMenu = MenuItemBox.parentNode.childNodes[1];
@@ -186,7 +188,7 @@ function aMenuItem(data) {
         }
         setStyles(MenuItemBox, ["NavMenuItemBoxMouseover"]);
 
-       
+
     }
     function MenuItemMouseOut(evt) {
         let MenuItemBox = evt.currentTarget.parentNode;
@@ -210,7 +212,7 @@ function aMenuItem(data) {
             // });
         }
         setStyles(MenuItemBox, ["NavMenuItemBox"]);
-    
+
     }
 
 
@@ -258,20 +260,22 @@ function aDropDownList(data) {
             hide(dropDownMenu);
             MenuItemBox.pulldownShow = false;
             setStyles(MenuItemBox, ["NavMenuItemBox"]);
-           
+
         }
         for (let i = 0; i < dropDown.length; i++) {
-            const text = dropDown[i];
+            const item = dropDown[i];
             element.push(
                 aDiv({
                     styles: ["DropDownItemBox"],
                     childs: [
                         aDiv({ styles: ["DropDownItemSelector"] }),
-                        aText({ styles: ["DropDownMenuText"], txt: text, type: "h2" }),
+                        aText({ styles: ["DropDownMenuText"], txt: item.name,t:item.t, type: "h2" }),
                         aDiv({
+                            save:{item:item},
                             styles: ["dropDownItemBoxResArea"],
                             onMouseover: dropDownItemMouseOver,
-                            onMouseout: dropDownItemMouseOut
+                            onMouseout: dropDownItemMouseOut,
+                            onClick: dropDownItemClick
                         })
                     ],
 
@@ -279,11 +283,14 @@ function aDropDownList(data) {
 
         }
         return element;
-
+        function dropDownItemClick(evt) {
+            let item=evt.currentTarget.save.item;
+            checkAction(item);
+        }
         function dropDownItemMouseOver(evt) {
             let selectsignal = evt.currentTarget.parentNode.childNodes[0];
             setStyles(selectsignal, ["DropDownItemSelectorMouseover"]);
-            
+
         }
         function dropDownItemMouseOut(evt) {
             // 			console.log("dropDownItem");
@@ -307,7 +314,8 @@ function aDropDownList(data) {
             let MenuItemBox = evt.currentTarget.parentNode.parentNode.parentNode.parentNode.childNodes[0];
             MenuItemBox.pulldownShow = false;
             setStyles(MenuItemBox, ["NavMenuItemBox"]);
-         
+
         }
+
     }
 }

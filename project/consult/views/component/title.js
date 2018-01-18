@@ -14,11 +14,9 @@ function aTitle(data) {
     });
 }
 function aBanner(data) {
-    let { img, title, subtitle, style } = data;
-    if (style == undefined)
-        style = "Banner";
+    let { img, title, subtitle } = data;
     return aDiv({
-        styles: [style],
+        styles: ["Banner"],
         childs: [
             aImg({ styles: ["BannerImg"], src: img }),
             aDiv({
@@ -32,7 +30,27 @@ function aBanner(data) {
 
     });
 }
-
+function aFixedBanner(data) {
+    let { img, title, subtitle, styles } = data;
+    if (styles == undefined)
+        styles = ["fixedBanner"];
+    return aDiv({
+        styles: styles,
+        childs: [
+            aDiv({
+                styles: ["BannerImgBox"], childs: [
+                    aImg({ styles: ["BannerImg"], src: img })
+                ]
+            }),
+            aDiv({
+                styles: ["BannerText"], childs: [
+                    aText({ styles: ["BannerTitle"], txt: title }),
+                    aText({ styles: ["BannerSubtitle"], txt: subtitle }),
+                ]
+            }),
+        ]
+    });
+}
 function aPageNav(bannerArr) {
     return aDiv({
         styles: ["PageNav"], childs: buildPageDot(bannerArr)
@@ -77,14 +95,14 @@ function buildPageDot(bannerArr) {
         if (!mouseIsInRect(evt.clientX, evt.clientY, rect)) {
             let pageNav = evt.currentTarget.parentNode.parentNode;
             hide(pageNav);
-        
+
         }
 
         if (dotRoot.checked == true)
             return;
         setStyles(selector, ["PageNavDotNormal"]);
 
-   
+
 
 
     }

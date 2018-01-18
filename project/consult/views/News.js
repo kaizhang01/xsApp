@@ -1,0 +1,1 @@
+aText({txt:"news"})

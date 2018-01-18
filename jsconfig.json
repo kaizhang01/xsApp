@@ -1,7 +1,6 @@
 {
-	"typeAcquisition": {
-		"include": [
-			"three"
-		]
-	}
+    "exclude":[
+     "server" ,
+     "project/drawApp"  
+    ]
 }

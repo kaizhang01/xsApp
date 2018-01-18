@@ -114,6 +114,12 @@
     margin: 0;
 }
 
+.BannerImgBox {
+    width: 100vw;
+    height: 200px;
+    background-color: #551b1b;
+}
+
 .BannerImg {
     width: 100%;
     height: 100%;

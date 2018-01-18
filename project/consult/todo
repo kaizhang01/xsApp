@@ -1,5 +1,6 @@
 
 --1/16/2018-- jump to different page via a linkMap
+                !!not use a linkMap, define it direct in menu data
 --get content language text use Post Method
 
 --adjust size on mobile programmatically 
