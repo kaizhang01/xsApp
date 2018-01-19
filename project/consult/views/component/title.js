@@ -91,8 +91,7 @@ function buildPageDot(bannerArr) {
         let selector = dotRoot.childNodes[1];
 
         let bannerBox = dotRoot.parentNode.parentNode;
-        let rect = bannerBox.getBoundingClientRect();
-        if (!mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+        if (!mouseIsInRect(evt, bannerBox)) {
             let pageNav = evt.currentTarget.parentNode.parentNode;
             hide(pageNav);
 
@@ -217,8 +216,7 @@ function aBannerBox(data) {
             show(pageNav);
         },
         onMouseout: function (evt) {
-            let rect = evt.currentTarget.getBoundingClientRect();
-            if (mouseIsInRect(evt.clientX, evt.clientY, rect)) {
+            if (mouseIsInRect(evt, evt.currentTarget)) {
                 return;
             }
             hide(pageNav);

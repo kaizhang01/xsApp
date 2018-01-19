@@ -1,6 +1,8 @@
+-- 1/18/2018 fix a pulldown menu bug
+            rewrite pulldown menu response method
 
---1/16/2018-- jump to different page via a linkMap
-                !!not use a linkMap, define it direct in menu data
+-- dynamic include component ,do not include  if already include                 
+
 --get content language text use Post Method
 
 --adjust size on mobile programmatically 
@@ -26,6 +28,8 @@ ok========================================
 -- deploy to heroku use github
 //function -------------------------------
 -- 1/16/2018-- display todo list when press logo--1/16/2018
+--1/16/2018-- jump to different page via a linkMap
+                !!not use a linkMap, define it direct in menu data--1/17/2018
 //layout----------------------------------
 --add foot
 --hideable strip that display brief information
