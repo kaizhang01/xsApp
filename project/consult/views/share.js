@@ -1,7 +1,7 @@
 
 function addHead() {
     addComponents([
-        'project/consult/views/component/head.js',
+        '/project/consult/views/component/head.js',
     ], function () {
         aMain({
             styles: ["Head"], childs: [
@@ -11,7 +11,7 @@ function addHead() {
                         logo: "/project/consult/img/logo.png",
                         menu: [
                             {
-                                item: { name: "About", t: "ui" },
+                                item: { name: "About"},//t:"content"
                                 dropDown: [
                                     { name: "Introduce", url: "/Introduce", t: "ui" },
                                     { name: "News", url: "/News", t: "ui" },
@@ -47,9 +47,14 @@ function addHead() {
 
 function addFoot() {
     addComponents([
-        'project/consult/views/component/foot.js',
+        '/project/consult/views/component/head.js',
     ], function () {
-        aFoot({ tradeMark: "All Rights Reserver © INFOBIZ" });
+        aMain({
+             childs: [
+                aFoot({ tradeMark: "All Rights Reserver © INFOBIZ" })
+            ]
+        });
     });
+
 
 }

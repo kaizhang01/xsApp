@@ -1,0 +1,12 @@
+.introduceMain{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    top: 128px;
+}
+
+.Content{
+    display:flex;
+    background-color: wheat;
+}

@@ -153,8 +153,8 @@ function aMenuItem(data) {
                     setStyles(MenuItemBox, ["NavMenuItemBoxMouseover"]);
 
                     //shwo and animate menu
-                    
-                    if (dropDownMenu!=undefined&&dropDownMenu.show == false) {
+
+                    if (dropDownMenu != undefined && dropDownMenu.show == false) {
                         show(dropDownMenu);
                         animate(dropDownMenu, {
                             type: "VerticalRollOut",
@@ -270,5 +270,17 @@ function aMenuItem(data) {
 
 }
 
+function aFoot(data) {
+    let { tradeMark } = data;
+    return aDiv({
+        styles: ["Foot"],
+        childs: [
+            aText({
+                txt: tradeMark,
+                styles: ["TradeMark"]
+            }),
+        ]
+    });
+}
 
 

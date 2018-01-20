@@ -30,27 +30,6 @@ function aBanner(data) {
 
     });
 }
-function aFixedBanner(data) {
-    let { img, title, subtitle, styles } = data;
-    if (styles == undefined)
-        styles = ["fixedBanner"];
-    return aDiv({
-        styles: styles,
-        childs: [
-            aDiv({
-                styles: ["BannerImgBox"], childs: [
-                    aImg({ styles: ["BannerImg"], src: img })
-                ]
-            }),
-            aDiv({
-                styles: ["BannerText"], childs: [
-                    aText({ styles: ["BannerTitle"], txt: title }),
-                    aText({ styles: ["BannerSubtitle"], txt: subtitle }),
-                ]
-            }),
-        ]
-    });
-}
 function aPageNav(bannerArr) {
     return aDiv({
         styles: ["PageNav"], childs: buildPageDot(bannerArr)
@@ -311,4 +290,28 @@ function aBannerBox(data) {
     }
 
     return bannerBox;
+}
+
+
+
+function aFixedBanner(data) {
+    let { img, title, subtitle, styles } = data;
+    if (styles == undefined)
+        styles = ["fixedBanner"];
+    return aDiv({
+        styles: styles,
+        childs: [
+            aDiv({
+                styles: ["BannerImgBox"], childs: [
+                    aImg({ styles: ["BannerImg"], src: img })
+                ]
+            }),
+            aDiv({
+                styles: ["BannerText"], childs: [
+                    aText({ styles: ["BannerTitle"], txt: title }),
+                    aText({ styles: ["BannerSubtitle"], txt: subtitle }),
+                ]
+            }),
+        ]
+    });
 }

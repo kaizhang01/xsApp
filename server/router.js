@@ -41,10 +41,10 @@ exports.handle = function (req, res) {
 
     req.routeArr = routeArr;
     let subRoutine = routine.subRoutine;
-    if (isGlobalRoute(req.b_name))
+    if (isSystemRoute(req.b_name))
         return;
 
-    function isGlobalRoute(branchName) {
+    function isSystemRoute(branchName) {
         let globalRoute = {
             "changeLanguage": function (req, res) {
                 console.log("changeLanguage" + req.b_Id);
@@ -62,7 +62,7 @@ exports.handle = function (req, res) {
                     assert(err == null, err);
                     // console.log(text.CHN) ;
                     if (text == null)
-                        res.end("no define in db(ui)");
+                        res.end(req.b_Id);//"no define in db(ui)"
                     else
                         res.end(text[config.cfg.language]);
                 });
@@ -70,7 +70,7 @@ exports.handle = function (req, res) {
             },
             "fileExist": function (req, res) {
                 let filepath = req.parsedPath.slice(req.parsedPath.indexOf("fileExist") + "fileExist".length, req.parsedPath.lastIndexOf("/"));
-                let filetype = req.parsedPath.slice(req.parsedPath.lastIndexOf("/")+1);
+                let filetype = req.parsedPath.slice(req.parsedPath.lastIndexOf("/") + 1);
                 let fileFullName = `.${filepath}.${filetype}`;
                 if (fs.existsSync(fileFullName)) {
                     res.end("yes");

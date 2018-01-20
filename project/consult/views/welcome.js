@@ -1,6 +1,7 @@
 addComponents(
     [
         'project/consult/views/component/title.js',
+        'project/consult/views/component/content.js',
         'project/consult/views/share.js'
     ], function (){
         addHead();
@@ -27,7 +28,7 @@ addComponents(
                     ]
     
                 }),
-                aDetailBox({ head: { name: "About",t:"ui", url: "" }, content: [] }),
+                aDetailBox({ head: { name: "About", url: "" }, content: [] }),
                 aDetailBox({ head: { name: "Service", url: "" }, content: [] }),
                 aDetailBox({ head: { name: "Client", url: "" }, content: [] }),
                 aDetailBox({ head: { name: "JoinUs", url: "" }, content: [] }),
@@ -38,20 +39,7 @@ addComponents(
 
 
 
-function aDetailBox(data) {
-    let { head, content } = data;
-    return aDiv({
-        styles: ["DetailBox"], childs: [
-            aDiv({
-                styles: ["DetailBoxHead"], childs: [
-                    aText({ styles: ["DetailBoxHeadText"], txt: head.name, type: "h2" }),
-                    aLink({ styles: ["DetailBoxHeadLinkMore"], txt: "more >", href: head.url })
-                ]
-            }),
-            aDiv({ styles: ["DetailBoxContent"], childs: content }),
-        ]
-    });
-}
+
 
 
 
