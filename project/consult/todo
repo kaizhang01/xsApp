@@ -1,7 +1,5 @@
-
-
--- 1/19/2018--complete introduce page
-   1/20/2018--write sideMenu component            
+-- 1/19/2018--construct introduce page
+   1/20/2018/p--write sideMenu component            
 --get content language text use Post Method
 
 --adjust size on mobile programmatically 
@@ -30,7 +28,7 @@ ok========================================
 //function -------------------------------
 -- 1/16/2018-- display todo list when press logo--1/16/2018
 --1/16/2018-- jump to different page via a linkMap
-                !!not use a linkMap, define it direct in menu data--1/17/2018
+            --!!not use a linkMap, define it direct in menu data--1/17/2018
 //layout----------------------------------
 --add foot
 --hideable strip that display brief information

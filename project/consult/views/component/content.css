@@ -6,6 +6,23 @@
     flex-direction: column;
 }
 .SmallBanner{
+   background-color: #7979ce;
    width:200px;
    height:100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.SmallBannerText{
+    color: wheat;
+    font-size: 2em;
+}
+
+
+.VerticalMenu{
+
+}
+.VerticalMenuItem
+{
+    
 }

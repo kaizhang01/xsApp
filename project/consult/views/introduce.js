@@ -6,14 +6,12 @@ addComponents([
 ], function () {
     addHead();
     aMain({
-        styles: ["introduceMain"], childs: [
+        styles: ["IntroduceMain"], childs: [
             aFixedBanner({ img: "", title: "Small Step , Big Idea", subtitle: "", styles: ["FixedBanner"] }),
             aDiv({
                 styles: ["Content"],
                 childs: [
-                    aSideMenu({
-                        head: { img: "", text:"Introduce" }
-                    }),
+                    aSideMenu({menu:mainMenu[0]}),
                 ]
             }),
         ]
