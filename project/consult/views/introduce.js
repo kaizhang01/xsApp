@@ -11,12 +11,14 @@ addComponents([
             aDiv({
                 styles: ["Content"],
                 childs: [
-                    aSideMenu({menu:mainMenu[0]}),
+                    aSideMenu({ menu: mainMenu[0] }),
+
                 ]
             }),
+            addFoot()
         ]
     });
 
-    addFoot();
+  
 });
 

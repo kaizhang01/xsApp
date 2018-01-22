@@ -19,7 +19,7 @@ function aSideMenu(data) {
                 img: "",
                 text: menu.item.name
             }),
-            // aVerticalMenu({ menu: menu.dropDown })
+            aVerticalMenu({ menu: menu.dropDown })
         ]
     });
 
@@ -32,18 +32,94 @@ function aVerticalMenu(data) {
             (function () {
                 let group = [];
                 for (let i = 0; i < menu.length; i++) {
-                    const menuItemText = menu[i];
-                    group.push(aDiv({
-                        styles:["VerticalMenuItem"],
-                        childs:[
-                            aText({styles:["VerticalMenuItemText"],txt:menuItemText})
-                        ]
-                    }))
+                    const menuItem = menu[i];
+                    let verticalMenuItem = aVerticalMenuItem(menuItem);
+                    group.push(verticalMenuItem);
+                    let subMenu = aSubMenu(menuItem.subMenu);
+                    if (subMenu != null) {
+                        subMenu.animation = {};
+                        group.push(subMenu);
+                        verticalMenuItem.subMenu = subMenu;
+                    }
+
+
                 }
+                return group;
             })(),
 
     });
+    function aVerticalMenuItem(menuItem) {
+        return aDiv({
+            styles: ["VerticalMenuItem"],
+            childs: [
+                aText({ styles: ["VerticalMenuItemText"], txt: menuItem.name }),
+                aDiv({
+                    styles: ["VerticalMenuItemResArea"],
+                    onMouseover: function (evt) {
+                        let verticalMenuItem = evt.currentTarget.parentNode;
+                        setStyles(verticalMenuItem, ["VerticalMenuItemMouseover"]);
+                    },
+                    onMouseout: function (evt) {
+                        let verticalMenuItem = evt.currentTarget.parentNode;
+                        setStyles(verticalMenuItem, ["VerticalMenuItem"]);
+                    },
+                    onClick: function (evt) {
+                        let verticalMenuItem = evt.currentTarget.parentNode;
+                        let subMenu = verticalMenuItem.subMenu;
+                        if(subMenu==null)
+                        return;
+                        if (subMenu.open == undefined)
+                        {
+                            subMenu.open = true;
+                            animate(subMenu, {
+                                type: "VerticalRollOut",
+                                demensionObj: subMenu.childNodes[0],
+                                duration: 200
+                            });
+                        }
+                        else{
+                            subMenu.open=undefined;
+                            animate(subMenu,{
+                                type:"VerticalRollIn",
+                                duration:200
+                            });
+                        }
+                     
+
+                    }
+                }),
+
+            ]
+        });
+    }
+    function aSubMenu(subMenu) {
+        if (subMenu == undefined)
+            return null;
+        return aDiv({
+            styles: ["SubMenuConnector"], childs: [
+                aDiv({
+                    styles: ["SubMenu"], childs: (function () {
+                        let group = [];
+                        for (let i = 0; i < subMenu.length; i++) {
+                            const menuItem = subMenu[i];
+                            group.push(aDiv({
+                                styles: ["SubMenuItem"],
+                                childs: [
+                                    aText({ styles: ["SubMenuItemText"], txt: menuItem.name }),
+                                    aDiv({ styles: ["SubMenuItemResArea"] }),
+
+                                ]
+                            }));
+                        }
+                        return group;
+                    })()
+                })
+            ]
+        });
+
+    }
 }
+
 function aDetailBox(data) {
     let { head, content } = data;
     return aDiv({

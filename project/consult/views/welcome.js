@@ -32,9 +32,10 @@ addComponents(
                 aDetailBox({ head: { name: "Service", url: "" }, content: [] }),
                 aDetailBox({ head: { name: "Client", url: "" }, content: [] }),
                 aDetailBox({ head: { name: "JoinUs", url: "" }, content: [] }),
+                addFoot()
             ]
         });
-        addFoot();
+      
     });
 
 

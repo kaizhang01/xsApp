@@ -1,28 +1,106 @@
-.SideMenuBox{
-    background-color: brown;
+.Content {
+    margin: 30px;
+    display: flex;
+    background-color: #f3f3f3;
+}
+
+.SideMenuBox {
+    background-color: #d9d9d9;
     width: 200px;
-    height:500px;
+    height: 500px;
     display: flex;
     flex-direction: column;
 }
-.SmallBanner{
-   background-color: #7979ce;
-   width:200px;
-   height:100px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+
+.SmallBanner {
+    background-color: #66526e;
+    width: 200px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.SmallBannerText{
+
+.SmallBannerText {
     color: wheat;
     font-size: 2em;
 }
 
-
-.VerticalMenu{
-
+.VerticalMenu {
+    display: flex;
+    flex-direction: column;
 }
-.VerticalMenuItem
-{
+
+.VerticalMenuItem {
+    background-color: rgb(233, 233, 233);
+    border-style: solid;
+    border-color: #afafaf;
+    border-width: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 99%;
+    height: 50px;
+    position: relative;
+}
+.VerticalMenuItemMouseover{
+    background-color: white;
+    border-style: solid;
+    border-color: #c2cbd2;
+    border-width: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 99%;
+    height: 50px;
+    position: relative;
+}
+
+.VerticalMenuItemText {
+    margin: 0;
+    font-size: 20px;
+}
+
+.VerticalMenuItemResArea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.SubMenuConnector{
+    overflow: hidden;
+    height: 0;
+}
+.SubMenu {
+    display: flex;
+    flex-direction: column;
     
+}
+
+.SubMenuItem {
+    background-color: white;
+    border-style: solid;
+    border-color: #c2cbd2;
+    border-width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 99%;
+    height: 30px;
+    position: relative;
+}
+
+.SubMenuItemText {
+    margin: 0;
+    font-size: 20px;
+}
+
+.SubMenuItemResArea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
 }
