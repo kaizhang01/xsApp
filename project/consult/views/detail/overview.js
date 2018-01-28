@@ -2,7 +2,7 @@ function addDetail() {
 
     return [
         aDiv({
-            styles: ["overviewContent"], childs: [
+            styles: ["OverviewContent"], childs: [
                 aText({
                     styles: ["OverviewText"],
                     txt: "overview-p1",
@@ -20,8 +20,12 @@ function addDetail() {
                 }),
             ]
         }),
+        aDiv({
+            styles: ["OverviewImgBox"], childs: [
+                aImg({ styles: ["OverviewImg"], src: "/project/consult/img/overview.png" })
+            ]
+        })
 
-        aImg({ styles: ["OverviewImg"], src: "/project/consult/img/overview.png" })
     ];
 }
 

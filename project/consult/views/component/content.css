@@ -1,7 +1,7 @@
 .Content {
     margin: 30px;
     display: flex;
-    background-color: #f3f3f3;
+    background-color: #d9d9d9;
 }
 
 .SideMenuBox {
@@ -60,6 +60,7 @@
 .VerticalMenuItemText {
     margin: 0;
     font-size: 20px;
+    font-weight: bold;
 }
 
 .VerticalMenuItemResArea {
@@ -124,7 +125,7 @@
 }
 
 .DetailBox {
-    background-color: white;
+    background-color: #d9d9d9;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -137,7 +138,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* background-color: #f3f3f3; */
+    background-color: #ffffff;
+    border-style: solid;
+    border-color: #c3c3c3;
+    border-width: 0 0 1px 0;
 }
 
 .DetailBoxHeadText {
@@ -148,15 +152,17 @@
     line-height: 100%;
     margin: 0;
     padding: 0px 30px;
+    white-space: nowrap;
 }
 
 .DetailBoxHeadLinksBox{
     display: flex;
     align-items: center;
+    margin: 0 20px;
 }
 .DetailBoxHeadLinksText {
     font-family: sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     margin: 0 5px;
     text-decoration: none;
     white-space: nowrap;
@@ -167,6 +173,11 @@
 }
 
 .DetailBoxContent {
-    /* min-height: 60vh; */
+    display: flex;
     width: 100%;
+    background-color: white;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+div#overview-detailContent {}

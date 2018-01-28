@@ -1,16 +1,6 @@
--- 1/19/2018--construct introduce page
-  + 1/20/2018  --write sideMenu component -- 1/21/2018/1
-  + 1/23/2018  --write overview content ,X--refresh a area without load whole page--X
-  + 1/24/2018  --use a uniform detailBox,
-  + 1/25/2018  X--generate menuPath at serverside--X
-                --build link chain. e.g. about > introduce > overview
-               --write searchMenuPath function, one detailBox hook deferent detail.
-  + 1/26/2018  --get big text through getContentText   
-                --base64 encode - 
-                
--- 1/26/2018 develop entirely offline  
-    
---get content language text use Post Method
+
+--1/28/2018 adddetail function 
+
 
 --adjust size on mobile programmatically 
     hide top menu when window too narrow ,change to a button ,when press, menu slide from right
@@ -40,9 +30,9 @@ ok========================================
 --1/16/2018-- jump to different page via a linkMap
             --!!not use a linkMap, define it direct in menu data--1/17/2018
 //layout----------------------------------
---add foot
+--use one code add foot and head simutaniously 
 --hideable strip that display brief information
---change img use css**not very flexible,css change txt not possible
+X--change img use css**not very flexible,css change txt not possible
 
 //language--------------------------------
 --language button , switch between two language ,use the database
@@ -57,6 +47,23 @@ ok========================================
   !!stop rolling when user move mouse or click window or lost focus(include change to other tab or change to other window) 
 
 //fix bug
--- 1/18/2018 fix a pulldown menu bug
-            rewrite pulldown menu response method-- 1/18/2018
++ 1/18/2018 fix a pulldown menu bug
+ -- rewrite pulldown menu response method
+
+//log
++ 1/19/2018--construct introduce overview page
+  -- 1/20/2018  --write sideMenu component -- 1/21/2018/1
+  -- 1/23/2018  --write overview content ,X--refresh a area without load whole page--X
+  -- 1/24/2018  --use a uniform detailBox,
+  -- 1/25/2018  X--generate menuPath at serverside--X
+                --build link chain. e.g. about > introduce > overview
+               --write searchMenuPath function, one detailBox hook deferent detail.
+  -- 1/26/2018  --get big text through getContentText   
+  -- 1/27/2018   ok--define head string indb(advisory...)
+                ok--add banner text in db
+                ok--%3E possible set translate "no" 
+                ok--download a local base64 encode/decode software
+                ok--entire offline development
+                ok--import/export all data between local database to remote database
+                ok--adjust overview page layout
 

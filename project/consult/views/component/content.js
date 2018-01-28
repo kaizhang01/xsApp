@@ -143,6 +143,8 @@ function refreshDetailBox(url) {
 }
 function aDetailBox(menuPath) {
     let currentMenu = menuPath[menuPath.length - 1];
+    let currentUrl = currentMenu.url;
+    let menuTrueName = currentUrl.slice(currentUrl.indexOf("/detail/") + 8);
     let detailBox = aDiv({
         styles: ["DetailBox"], childs: [
             aDiv({
@@ -184,15 +186,14 @@ function aDetailBox(menuPath) {
                 ]
             }),
             aDiv({
-                id: currentMenu.name + "-detailContent",
+                id: menuTrueName + "-detailContent",
                 styles: ["DetailBoxContent"],
             }),
         ]
     });
-    let currentUrl = currentMenu.url;
-    let currentMenuName = currentUrl.slice(currentUrl.indexOf("/detail/") + 8);
-    addComponents([`/project/consult/views/detail/${currentMenuName}.js`], function () {
-        let detailContent = document.getElementById(currentMenuName + "-detailContent");
+   
+    addComponents([`/project/consult/views/detail/${menuTrueName}.js`], function () {
+        let detailContent = document.getElementById(menuTrueName + "-detailContent");
         addChild(detailContent, addDetail());
 
     });

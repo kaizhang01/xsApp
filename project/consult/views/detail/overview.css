@@ -1,0 +1,19 @@
+.OverviewContent {
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.OverviewText {
+    padding: 0 30px;
+    
+}
+.OverviewImgBox{
+    display: flex;
+    flex-direction: column;
+    min-width: 100px;
+    padding: 0 30px;
+}
+.OverviewImg {
+    width: 100%;
+    height: auto;
+}
