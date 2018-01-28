@@ -1,5 +1,15 @@
 -- 1/19/2018--construct introduce page
-   1/20/2018/p--write sideMenu component            
+  + 1/20/2018  --write sideMenu component -- 1/21/2018/1
+  + 1/23/2018  --write overview content ,X--refresh a area without load whole page--X
+  + 1/24/2018  --use a uniform detailBox,
+  + 1/25/2018  X--generate menuPath at serverside--X
+                --build link chain. e.g. about > introduce > overview
+               --write searchMenuPath function, one detailBox hook deferent detail.
+  + 1/26/2018  --get big text through getContentText   
+                --base64 encode - 
+                
+-- 1/26/2018 develop entirely offline  
+    
 --get content language text use Post Method
 
 --adjust size on mobile programmatically 
@@ -9,11 +19,11 @@ ok========================================
 //feature---------------------------------
 *client*
 --use pure javascript and css -- no template, no new syntax
---send basic html with data describe needed html info
+--send basic html with data ,describe needed html info
 --build html entire on client side
   + page are defined via seperate js file , 
 --dynamic include other js as view component
-  + 1/18/2018--do not include  if already include   --1/19/2018
+  + 1/18/2018--do not include js if already include   --1/19/2018
 
 *server*
 --use pure nodejs, no other package needed
@@ -40,7 +50,9 @@ ok========================================
 //effect----------------------------------
 --box shadow except top
 --pull down menu animation
---keep rolling when mouse cursor out  the banner area, stop immediatelly when mouse over
+--rolling banner
+  keep rolling when mouse cursor out  the banner area, 
+  stop immediatelly when mouse over
   hide page navigator when mouse cursor out the banner 
   !!stop rolling when user move mouse or click window or lost focus(include change to other tab or change to other window) 
 

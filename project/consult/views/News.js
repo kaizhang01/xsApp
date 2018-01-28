@@ -1,1 +1,0 @@
-aText({txt:"news"})

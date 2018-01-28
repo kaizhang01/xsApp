@@ -3,6 +3,7 @@
     ,"db":"../project/consult/db.js"
 	,"dbName3":"mongodb://relaxslow:xs197841@ds163836.mlab.com:63836/relaxslowdb"
     ,"dbName2":"mongodb://localhost/appdb"
+    ,"dbName1":"mongodb://127.0.0.1/appdb"
     ,"dbName":"mongodb://heroku_td0ff82c:fers9rhokmk5fpe2t66mf0pj09@ds255787.mlab.com:55787/heroku_td0ff82c"
 
 }

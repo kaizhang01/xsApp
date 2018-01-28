@@ -10,6 +10,12 @@ exports.connectDb=function(url) {
     });
     exports.UI = mongoose.model("UI", UISchema, "ui");
 
+    var ContentSchema= new mongoose.Schema({
+        contentName:String,
+        USA:String,
+        CHN:String
+    });
+    exports.Content=mongoose.model("Content",ContentSchema,"content");
 
 };
 

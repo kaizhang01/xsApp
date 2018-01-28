@@ -5,9 +5,7 @@ const router = require('../../server/router.js');
 const render = require('../../server/render.js');
 const assert = require('assert');
 const db = require("./db.js");
-// const config = require('../../server/config.js');
-
-
+const config = require("../../server/config.js");
 
 // map: {
 // "index": router.nodef,
@@ -21,7 +19,7 @@ const db = require("./db.js");
 let main = function (req, res) {
     render.html(res, {
         view: "/project/consult/views/welcome.js",
-
+        data: { mainMenu: config.cfg.mainMenu }
     });
 };
 
@@ -38,21 +36,24 @@ function displayTodoList(req, res) {
 }
 exports.subRoutine = {
     "": main,
- 
+
     "todo": displayTodoList,
 
-    "Introduce": function (req, res) {
-        render.html(res,{
-            view:"/project/consult/views/introduce.js",
-        });
-    },
-    "News": function (req, res) {
-        res.end("news!!");
-    },
-    "JoinUs": function (req, res) {
-        res.end("joinus!!");
-    }
 
+    "detail": function (req, res) {
+        let currentMenu=req.routeArr[2];
+        // let detailContent=`/project/consult/views/${currentMenu}.js`;
+        render.html(res, {
+            data: {
+                mainMenu: config.cfg.mainMenu,
+                // detailContent:detailContent,
+                currentMenu: currentMenu
+            },
+            view: "/project/consult/views/detailPage.js"
+        });
+      
+
+    }
 
 };
 

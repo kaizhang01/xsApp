@@ -61,7 +61,7 @@ function aStrip(data) {
     let { text } = data;
     let StripHeadBox = aDiv({
         styles: ["StripHeadBox"], childs: [
-            aText({ styles: ["StripHeadText"], txt: text }),
+            aText({ styles: ["StripHeadText"], txt: text,translate:"content"}),
         ]
     });
 
@@ -138,15 +138,15 @@ function buildNavMenuHorizon(menu) {
 }
 
 function aMenuItem(data) {
-    let { item, dropDown } = data;
+    let { name,url, subMenu } = data;
 
     let MenuItemBox = aDiv({
         styles: ["NavMenuItemBox"], childs: [
-            aText({ txt: item.name, t: item.t, type: "h2", styles: ["NavMenuTxt"] }),
+            aText({ txt: name, type: "h2", styles: ["NavMenuTxt"] }),
             aDiv({
                 styles: ["NavMenuItemResArea"],
                 onClick: function (evt) {
-                    checkAction(item);
+                    checkAction(url);
                 },
                 onMouseover: function (evt) {
                     // set style
@@ -177,7 +177,7 @@ function aMenuItem(data) {
         ]
     });
     // MenuItemBox.pulldownShow = false;
-    let dropDownMenu = aDropDownList({ dropDown: dropDown });
+    let dropDownMenu = aDropDownList({ dropDown: subMenu });
     if (dropDownMenu != undefined) {
         dropDownMenu.show = false;
         dropDownMenu.animation = {};
@@ -228,7 +228,7 @@ function aMenuItem(data) {
             }
             function addItem(item) {
                 let dropDownItemSelector = aDiv({ styles: ["DropDownItemSelector"] });
-                let dropDownItemText = aText({ styles: ["DropDownMenuText"], txt: item.name, t: item.t, type: "h2" });
+                let dropDownItemText = aText({ styles: ["DropDownMenuText"], txt: item.name, type: "h2" });
                 let dropDownItemResArea = aDiv({
                     save: { item: item },
                     styles: ["dropDownItemBoxResArea"],
@@ -249,7 +249,7 @@ function aMenuItem(data) {
 
                     },
                     onClick: function (evt) {
-                        checkAction(item);
+                        checkAction(item.url);
                     },
                 });
                 element.push(

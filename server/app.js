@@ -7,7 +7,8 @@ function* Tasks() {
     yield config.read([
         "./project/consult/configServer.json",
         "./project/consult/configClient.json",
-        "./project/consult/configLanguage.json"
+        "./project/consult/configLanguage.json",
+        "./project/consult/mainMenu.json"
     ]);
 
 

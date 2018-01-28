@@ -9,7 +9,7 @@ function aSmallBanner(data) {
     });
 }
 function aSideMenu(data) {
-    let { menu, styles } = data;
+    let { menu } = data;
     // if (checkParamCorrect(data))
     //     return null;
     return aDiv({
@@ -17,9 +17,9 @@ function aSideMenu(data) {
         childs: [
             aSmallBanner({
                 img: "",
-                text: menu.item.name
+                text: menu.name
             }),
-            aVerticalMenu({ menu: menu.dropDown })
+            aVerticalMenu({ menu: menu.subMenu })
         ]
     });
 
@@ -27,6 +27,8 @@ function aSideMenu(data) {
 
 function aVerticalMenu(data) {
     let { menu } = data;
+    if (menu == undefined)
+        return null;
     return aDiv({
         styles: ["VerticalMenu"], childs:
             (function () {
@@ -66,10 +68,9 @@ function aVerticalMenu(data) {
                     onClick: function (evt) {
                         let verticalMenuItem = evt.currentTarget.parentNode;
                         let subMenu = verticalMenuItem.subMenu;
-                        if(subMenu==null)
-                        return;
-                        if (subMenu.open == undefined)
-                        {
+                        if (subMenu == null)
+                            return;
+                        if (subMenu.open == undefined) {
                             subMenu.open = true;
                             animate(subMenu, {
                                 type: "VerticalRollOut",
@@ -77,14 +78,14 @@ function aVerticalMenu(data) {
                                 duration: 200
                             });
                         }
-                        else{
-                            subMenu.open=undefined;
-                            animate(subMenu,{
-                                type:"VerticalRollIn",
-                                duration:200
+                        else {
+                            subMenu.open = undefined;
+                            animate(subMenu, {
+                                type: "VerticalRollIn",
+                                duration: 200
                             });
                         }
-                     
+
 
                     }
                 }),
@@ -102,35 +103,98 @@ function aVerticalMenu(data) {
                         let group = [];
                         for (let i = 0; i < subMenu.length; i++) {
                             const menuItem = subMenu[i];
-                            group.push(aDiv({
-                                styles: ["SubMenuItem"],
-                                childs: [
-                                    aText({ styles: ["SubMenuItemText"], txt: menuItem.name }),
-                                    aDiv({ styles: ["SubMenuItemResArea"] }),
-
-                                ]
-                            }));
+                            group.push(aSubMenuItem(menuItem));
                         }
                         return group;
                     })()
                 })
             ]
         });
+        function aSubMenuItem(menuItem) {
+            return aDiv({
+                styles: ["SubMenuItem"],
+                childs: [
+                    aText({ styles: ["SubMenuItemText"], txt: menuItem.name }),
+                    aDiv({ styles: ["SubMenuItemResArea"] }),
 
+                ],
+                onMouseover: function (evt) {
+                    let subMenuItem = evt.currentTarget;
+                    let subMenuItemText = subMenuItem.childNodes[0];
+                    setStyles(subMenuItem, ["SubMenuItemMouseOver"]);
+                    setStyles(subMenuItemText, ["SubMenuItemTextMouseOver"]);
+                },
+                onMouseout: function (evt) {
+                    let subMenuItem = evt.currentTarget;
+                    let subMenuItemText = subMenuItem.childNodes[0];
+                    setStyles(subMenuItem, ["SubMenuItem"]);
+                    setStyles(subMenuItemText, ["SubMenuItemText"]);
+                },
+                onClick: function (evt) {
+                    let subMenuItem = evt.currentTarget;
+                    refreshDetailBox(menuItem.url, detailBox);
+                }
+            });
+        }
     }
 }
-
-function aDetailBox(data) {
-    let { head, content } = data;
-    return aDiv({
+function refreshDetailBox(url) {
+    let detailBox = document.getElementById("detailBox");
+}
+function aDetailBox(menuPath) {
+    let currentMenu = menuPath[menuPath.length - 1];
+    let detailBox = aDiv({
         styles: ["DetailBox"], childs: [
             aDiv({
                 styles: ["DetailBoxHead"], childs: [
-                    aText({ styles: ["DetailBoxHeadText"], txt: head.name, type: "h2" }),
-                    aLink({ styles: ["DetailBoxHeadLinkMore"], txt: "more >", href: head.url })
+                    aText({ styles: ["DetailBoxHeadText"], txt: currentMenu.name, type: "h2" }),
+                    aDiv({
+                        styles: ["DetailBoxHeadLinksBox"], childs:
+                            (function () {
+                                let linkGroup = [];
+                                if (menuPath.length == 1) {
+                                    linkGroup.push(aText({ styles: ["DetailBoxHeadLinksText"], txt: "more" }));
+                                    linkGroup.push(aText({ styles: ["DetailBoxHeadLinksConnector"], txt: ">", translate: "no" }));
+                                } else {
+                                    for (let i = 0; i < menuPath.length; i++) {
+                                        const menu = menuPath[i];
+                                        linkGroup.push(aLinkText(menu));
+                                        if (i != menuPath.length - 1)
+                                            linkGroup.push(aText({ styles: ["DetailBoxHeadLinksConnector"], txt: ">", translate: "no" }));
+                                    }
+                                }
+
+                                return linkGroup;
+                                function aLinkText(menu) {
+                                    return aText({
+                                        styles: ["DetailBoxHeadLinksText"], txt: menu.name,
+                                        onMouseover: function () {
+
+                                        },
+                                        onMouseout: function () {
+
+                                        },
+                                        onClick: function () {
+
+                                        }
+                                    });
+                                }
+                            })()
+                    })
                 ]
             }),
-            aDiv({ styles: ["DetailBoxContent"], childs: content }),
+            aDiv({
+                id: currentMenu.name + "-detailContent",
+                styles: ["DetailBoxContent"],
+            }),
         ]
     });
+    let currentUrl = currentMenu.url;
+    let currentMenuName = currentUrl.slice(currentUrl.indexOf("/detail/") + 8);
+    addComponents([`/project/consult/views/detail/${currentMenuName}.js`], function () {
+        let detailContent = document.getElementById(currentMenuName + "-detailContent");
+        addChild(detailContent, addDetail());
+
+    });
+    return detailBox;
 }

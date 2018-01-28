@@ -2,35 +2,32 @@
 addComponents([
     '/project/consult/views/component/title.js',
     '/project/consult/views/component/content.js',
-    '/project/consult/views/share.js',
+    '/project/consult/views/share.js'
 ], function () {
     addHead();
     aMain({
-        styles: ["IntroduceMain"], childs: [
+        styles: ["DetailMain"], childs: [
             aFixedBanner({ img: "", title: "Small Step , Big Idea", subtitle: "", styles: ["FixedBanner"] }),
-            // buildContent(),
+            buildContent(),
             addFoot()
         ]
     });
 
     function buildContent() {
-        let data = findFirstLinkData(mainMenu[0]);
-       
+        let search = serverData.currentMenu;
+        let mainMenu = serverData.mainMenu;
+        let menuPath = searchMenuTree(search, mainMenu);
+         findDefaultPath(menuPath);
         let content = aDiv({
             styles: ["Content"],
             childs: [
-                aSideMenu({ menu: mainMenu[0] }),
-                aDetailBox(data)
+                aSideMenu({ menu:menuPath[0] }),
+                aDetailBox(menuPath)
             ]
         });
+        
         return content;
     }
-    function findFirstLinkData(menu) {
-        let subMenu = menu;
-        while (subMenu.subMenu != undefined) {
-            subMenu = subMenu.subMenu[0];
-        }
-        return subMenu;
-    }
+    
 });
 

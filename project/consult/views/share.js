@@ -1,44 +1,45 @@
-const mainMenu = [
-    {
-        item: { name: "About" },//t:"content"
-        dropDown: [{
-            name: "Introduce", url: "/Introduce",
-            subMenu: [
-                { name: "overview", url: "/overview" },
-                { name: "culture", url: "/culture" },
-                { name: "progress", url: "/progress" }
-            ]
-        },
-        {
-            name: "News", url: "/News",
-            subMenu: [
-                { name: "Company News", url: "/companyNews" },
-                { name: "Contract News", url: "/ContractNews" }
-            ]
-        },
-        { name: "Honor", url: "/Honor" },
-        { name: "Team", url: "/Team" }
-        ]
-    },
-    {
-        item: { name: "Service" },
-        dropDown: [
-            { name: "Cyber Security", url: "/CyberSecurity" },
-            { name: "Data Analyze", url: "/DataAnalyze" },
-            { name: "Website Design", url: "/WebSiteDesign" }
-        ]
-    },
-    {
-        item: { name: "Client" },
-        dropDown: [
-            { name: "Microsoft", url: "/Microsoft" },
-            { name: "Google", url: "/Google" },
-            { name: "Amazon", url: "/Amazon" }
-        ]
-    },
-    { item: { name: "JoinUs", url: "/JoinUs" } },
+// const mainMenu = [
+//     {
+//         item: { name: "About" },//t:"content"
+//         subMenu: [
+//             {
+//                 name: "Introduce", url: "/detail/Introduce",
+//                 subMenu: [
+//                     { name: "overview", url: "/detail/overview" },
+//                     { name: "culture", url: "/detail/culture" },
+//                     { name: "progress", url: "/detail/progress" }
+//                 ]
+//             },
+//             {
+//                 name: "News", url: "/detail/News",
+//                 subMenu: [
+//                     { name: "Company News", url: "/detail/companyNews" },
+//                     { name: "Contract News", url: "/detail/ContractNews" }
+//                 ]
+//             },
+//             { name: "Honor", url: "/detail/Honor" },
+//             { name: "Team", url: "/detail/Team" }
+//         ]
+//     },
+//     {
+//         item: { name: "Service" },
+//         subMenu: [
+//             { name: "Cyber Security", url: "/detail/CyberSecurity" },
+//             { name: "Data Analyze", url: "/detail/DataAnalyze" },
+//             { name: "Website Design", url: "/detail/WebSiteDesign" }
+//         ]
+//     },
+//     {
+//         item: { name: "Client" },
+//         subMenu: [
+//             { name: "Microsoft", url: "/detail/Microsoft" },
+//             { name: "Google", url: "/detail/Google" },
+//             { name: "Amazon", url: "/detail/Amazon" }
+//         ]
+//     },
+//     { item: { name: "JoinUs", url: "/detail/JoinUs" } },
 
-];
+// ];
 function addHead() {
     addComponents([
         '/project/consult/views/component/head.js',
@@ -46,10 +47,10 @@ function addHead() {
         aMain({
             styles: ["Head"], childs: [
                 aStretchableNavBar({
-                    stripData: { text: "Advisory hotline: 400-881-2881" },
+                    stripData: { text: "AdvisoryHotline" },
                     navBarData: {
                         logo: "/project/consult/img/logo.png",
-                        menu: mainMenu
+                        menu: serverData.mainMenu
                     }
                 })
             ]

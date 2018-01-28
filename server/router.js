@@ -13,7 +13,7 @@ exports.init = function () {
 };
 
 exports.handle = function (req, res) {
-
+    // console.log(process.memoryUsage());
     let { parsedPath, method } = req;
 
     let routeArr = parsedPath.split("/");
@@ -36,7 +36,7 @@ exports.handle = function (req, res) {
             routeArr[2] = ":";
 
         }
-        req.b_adj = routeArr[3];
+        // req.b_adj = routeArr[3];
     }
 
     req.routeArr = routeArr;
@@ -58,15 +58,33 @@ exports.handle = function (req, res) {
             },
             "getUIText": function (req, res) {
                 // console.log("getUIText--" + res.b_Id);
-                db.UI.findOne({ "USA": req.b_Id }, function (err, text) {
+                let txt = decodeURI(req.b_Id);
+                db.UI.findOne({ "USA": txt }, function (err, text) {
                     assert(err == null, err);
                     // console.log(text.CHN) ;
-                    if (text == null)
-                        res.end(req.b_Id);//"no define in db(ui)"
-                    else
-                        res.end(text[config.cfg.language]);
+                    let encoded;
+                    if (text == null) {
+                        encoded = encodeURI(txt);
+                    }
+                    else {
+                        encoded = encodeURI(text[config.cfg.language]);
+                    }
+                    res.end(encoded);//"no define in db(ui)"
                 });
 
+            },
+            "getContentText":function(req,res){
+                let txt=decodeURI(req.b_Id);
+                db.Content.findOne({"contentName":txt},function(err,text){
+                    assert(err==null,err);
+                    if(text==null)
+                    {
+                        let send=Buffer.from(`${req.b_Id} no define in db`).toString('base64');
+                        res.end(send);
+                    }else{
+                        res.end(text[config.cfg.language]);
+                    }
+                });
             },
             "fileExist": function (req, res) {
                 let filepath = req.parsedPath.slice(req.parsedPath.indexOf("fileExist") + "fileExist".length, req.parsedPath.lastIndexOf("/"));
@@ -204,4 +222,16 @@ exports.redirect = function (res, url) {
 function routineUndefined(req, res) {
     res.setHeader("Content-Type", "text/plain");
     res.end(` ${res.undef} not define`);
+}
+
+
+function b64DecodeUnicode(str) {
+    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+    }).join(''));
+}
+function b64EncodeUnicode(str) {
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode(parseInt(p1, 16))
+    }))
 }

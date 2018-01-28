@@ -12,26 +12,26 @@ addComponents(
                     bannerArr: [
                         {
                             img: "/project/consult/img/bannerImg.jpg",
-                            title: "Information Bussiness Services",
-                            subtitle: "help build business architecture, information architecture,caber security, flow Chart diagram, help solve the problems in App Development"
+                            title: "banner1-title",
+                            subtitle: "banner1-subtitle"
                         },
                         {
                             img: "/project/consult/img/bannerImg2.png",
-                            title: "Cost Less",
-                            subtitle: "order now, gain 50% discount"
+                            title: "banner2-title",
+                            subtitle: "banner2-subtitle"
                         },
                         {
                             img: "/project/consult/img/bannerImg3.jpg",
-                            title: "Join Us",
-                            subtitle: "build better life together and achieve success earlier"
+                            title: "banner3-title",
+                            subtitle: "banner3-subtitle"
                         }
                     ]
     
                 }),
-                aDetailBox({ head: { name: "About", url: "" }, content: [] }),
-                aDetailBox({ head: { name: "Service", url: "" }, content: [] }),
-                aDetailBox({ head: { name: "Client", url: "" }, content: [] }),
-                aDetailBox({ head: { name: "JoinUs", url: "" }, content: [] }),
+                aDetailBox( [{ name: "About", url: "/detail/About" }]),
+                aDetailBox([{ name: "Service", url: "/detail/Service" }]),
+                aDetailBox([{ name: "Client", url: "/detail/Client" }]),
+                aDetailBox([{ name: "JoinUs", url: "/detail/JoinUs" }]),
                 addFoot()
             ]
         });

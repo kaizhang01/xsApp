@@ -1,0 +1,87 @@
+{
+    "mainMenu": [
+        {
+            "name": "About",
+            "subMenu": [
+                {
+                    "name": "Introduce",
+                    "url": "/detail/overview",
+                    "subMenu": [
+                        {
+                            "name": "overview",
+                            "url": "/detail/overview"
+                        },
+                        {
+                            "name": "culture",
+                            "url": "/detail/culture"
+                        },
+                        {
+                            "name": "progress",
+                            "url": "/detail/progress"
+                        }
+                    ]
+                },
+                {
+                    "name": "News",
+                    "url": "/detail/companyNews",
+                    "subMenu": [
+                        {
+                            "name": "Company News",
+                            "url": "/detail/companyNews"
+                        },
+                        {
+                            "name": "Contract News",
+                            "url": "/detail/ContractNews"
+                        }
+                    ]
+                },
+                {
+                    "name": "Honor",
+                    "url": "/detail/Honor"
+                },
+                {
+                    "name": "Team",
+                    "url": "/detail/Team"
+                }
+            ]
+        },
+        {
+            "name": "Service",
+            "subMenu": [
+                {
+                    "name": "Cyber Security",
+                    "url": "/detail/CyberSecurity"
+                },
+                {
+                    "name": "Data Analyze",
+                    "url": "/detail/DataAnalyze"
+                },
+                {
+                    "name": "Website Design",
+                    "url": "/detail/WebSiteDesign"
+                }
+            ]
+        },
+        {
+            "name": "Client",
+            "subMenu": [
+                {
+                    "name": "Microsoft",
+                    "url": "/detail/Microsoft"
+                },
+                {
+                    "name": "Google",
+                    "url": "/detail/Google"
+                },
+                {
+                    "name": "Amazon",
+                    "url": "/detail/Amazon"
+                }
+            ]
+        },
+        {
+            "name": "JoinUs",
+            "url": "/detail/JoinUs"
+        }
+    ]
+}
