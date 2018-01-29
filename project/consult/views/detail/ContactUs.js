@@ -1,5 +1,5 @@
 function addDetail(detailConent) {
     return [
-        aText({ txt: "join us" })
+        aText({ txt: "contact us" })
     ];
 }

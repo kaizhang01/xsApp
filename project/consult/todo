@@ -1,6 +1,8 @@
 
---1/28/2018 adddetail function 
+--1/28/2018 sidemenu link jump correctly
+--1/28/2018 change detailbox style  on welcome page 
 
+--load all banner resource  
 
 --adjust size on mobile programmatically 
     hide top menu when window too narrow ,change to a button ,when press, menu slide from right
@@ -49,8 +51,10 @@ X--change img use css**not very flexible,css change txt not possible
 //fix bug
 + 1/18/2018 fix a pulldown menu bug
  -- rewrite pulldown menu response method
+ --1/28/2018--fix bug -- menu don't disappear when mouse move quickly
 
 //log
+--1/28/2018 --adddetail function bund same function in deferent file
 + 1/19/2018--construct introduce overview page
   -- 1/20/2018  --write sideMenu component -- 1/21/2018/1
   -- 1/23/2018  --write overview content ,X--refresh a area without load whole page--X
@@ -61,7 +65,7 @@ X--change img use css**not very flexible,css change txt not possible
   -- 1/26/2018  --get big text through getContentText   
   -- 1/27/2018   ok--define head string indb(advisory...)
                 ok--add banner text in db
-                ok--%3E possible set translate "no" 
+                ok--%3E for "?" , give possibility to  set translate "no" 
                 ok--download a local base64 encode/decode software
                 ok--entire offline development
                 ok--import/export all data between local database to remote database

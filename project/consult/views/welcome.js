@@ -3,11 +3,11 @@ addComponents(
         'project/consult/views/component/title.js',
         'project/consult/views/component/content.js',
         'project/consult/views/share.js'
-    ], function (){
+    ], function () {
         addHead();
         aMain({
             styles: ["WelcomeMain"], childs: [
-    
+
                 aBannerBox({
                     bannerArr: [
                         {
@@ -26,16 +26,30 @@ addComponents(
                             subtitle: "banner3-subtitle"
                         }
                     ]
-    
+
                 }),
-                aDetailBox( [{ name: "About", url: "/detail/About" }]),
-                aDetailBox([{ name: "Service", url: "/detail/Service" }]),
-                aDetailBox([{ name: "Client", url: "/detail/Client" }]),
-                aDetailBox([{ name: "JoinUs", url: "/detail/JoinUs" }]),
+                (function () {
+                    let data = [
+                        { name: "About", url: "/detail/About" },
+                        { name: "Service", url: "/detail/Service" },
+                        { name: "Client", url: "/detail/Client" },
+                        { name: "Contact Us", url: "/detail/ContactUs" }
+                    ];
+                    let detailBoxs = [];
+                    for (let i = 0; i < data.length; i++) {
+                        const d = data[i];
+                        detailBoxs.push(aDiv({
+                            styles: ["WelcomeGuideBox"], childs: [
+                                aDetailBox([d])
+                            ]
+                        }));
+                    }
+                    return detailBoxs;
+                })(),
                 addFoot()
             ]
         });
-      
+
     });
 
 

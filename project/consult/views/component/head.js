@@ -61,7 +61,7 @@ function aStrip(data) {
     let { text } = data;
     let StripHeadBox = aDiv({
         styles: ["StripHeadBox"], childs: [
-            aText({ styles: ["StripHeadText"], txt: text,translate:"content"}),
+            aText({ styles: ["StripHeadText"], txt: text, translate: "content" }),
         ]
     });
 
@@ -138,7 +138,7 @@ function buildNavMenuHorizon(menu) {
 }
 
 function aMenuItem(data) {
-    let { name,url, subMenu } = data;
+    let { name, url, subMenu } = data;
 
     let MenuItemBox = aDiv({
         styles: ["NavMenuItemBox"], childs: [
@@ -149,6 +149,7 @@ function aMenuItem(data) {
                     checkAction(url);
                 },
                 onMouseover: function (evt) {
+                    // console.log("menuItem--mouseover");
                     // set style
                     setStyles(MenuItemBox, ["NavMenuItemBoxMouseover"]);
 
@@ -166,7 +167,7 @@ function aMenuItem(data) {
 
                 },
                 onMouseout: function (evt) {
-
+                    // console.log("menuItem--mouseout");
                     if (!mouseIsInRect(evt, dropDownMenu)) {
                         setStyles(MenuItemBox, ["NavMenuItemBox"]);
                         hide(dropDownMenu);
@@ -204,12 +205,15 @@ function aMenuItem(data) {
         let dropDownMenu = aDiv({
             styles: ["DropDownBoxConnector"], childs: [
                 dropDownBox
-
             ],
             onMouseout: function (evt) {
                 let isInDropDownBox = mouseIsInRect(evt, dropDownBox);
-                let isInMenuItem = mouseIsInRect(evt, MenuItemBox);
-                if (!isInDropDownBox && !isInMenuItem) {
+                let isInMenuItem = mouseIsInRect(evt,MenuItemBox );
+                let isInDropDownConnector=mouseIsInRect(evt, dropDownMenu);
+                // let isOut=!isInDropDownBox && !isInMenuItem;
+                // console.log("dropDownMenu--mouseout","isInDropDownConnector",isInDropDownBox,"isOUt",isOut);
+           
+                if ((!isInDropDownConnector||!isInDropDownBox) && !isInMenuItem ) {
                     setStyles(MenuItemBox, ["NavMenuItemBox"]);
                     hide(dropDownMenu);
 
@@ -233,12 +237,15 @@ function aMenuItem(data) {
                     save: { item: item },
                     styles: ["dropDownItemBoxResArea"],
                     onMouseover: function (evt) {
+                        // console.log("dropDownMenuitem--mouseover");
                         setStyles(dropDownItemSelector, ["DropDownItemSelectorMouseover"]);
                     },
                     onMouseout: function (evt) {
+                        let isInDropDownConnector = mouseIsInRect(evt, dropDownMenu);
                         let isInDropDownBox = mouseIsInRect(evt, dropDownBox);
                         let isInMenuItem = mouseIsInRect(evt, MenuItemBox);
-                        if (!isInDropDownBox && !isInMenuItem) {
+                        // console.log("dropDownMenuitem--mouseout", "isInDropDownBox", isInDropDownBox);
+                        if (!isInDropDownBox && !isInMenuItem ) {
                             setStyles(MenuItemBox, ["NavMenuItemBox"]);
                             hide(dropDownMenu);
 

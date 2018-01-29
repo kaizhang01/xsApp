@@ -68,8 +68,10 @@ function aVerticalMenu(data) {
                     onClick: function (evt) {
                         let verticalMenuItem = evt.currentTarget.parentNode;
                         let subMenu = verticalMenuItem.subMenu;
-                        if (subMenu == null)
+                        if (subMenu == null){
+                            directToUrl(menuItem.url)  ;
                             return;
+                        }
                         if (subMenu.open == undefined) {
                             subMenu.open = true;
                             animate(subMenu, {
@@ -132,7 +134,8 @@ function aVerticalMenu(data) {
                 },
                 onClick: function (evt) {
                     let subMenuItem = evt.currentTarget;
-                    refreshDetailBox(menuItem.url, detailBox);
+                    // refreshDetailBox(menuItem.url);
+                    directToUrl(menuItem.url);
                 }
             });
         }
