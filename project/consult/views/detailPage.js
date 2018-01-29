@@ -7,7 +7,7 @@ addComponents([
     addHead();
     aMain({
         styles: ["DetailMain"], childs: [
-            aFixedBanner({ img: "", title: "Small Step , Big Idea", subtitle: "", styles: ["FixedBanner"] }),
+            aFixedBanner({ img: "", title: "banner0-title", subtitle: "", styles: ["FixedBanner"] }),
             buildContent(),
             addFoot()
         ]

@@ -308,8 +308,8 @@ function aFixedBanner(data) {
             }),
             aDiv({
                 styles: ["BannerText"], childs: [
-                    aText({ styles: ["BannerTitle"], txt: title }),
-                    aText({ styles: ["BannerSubtitle"], txt: subtitle }),
+                    aText({ styles: ["BannerTitle"], txt: title,translate:"content" }),
+                    aText({ styles: ["BannerSubtitle"], txt: subtitle,translate:"content" }),
                 ]
             }),
         ]
