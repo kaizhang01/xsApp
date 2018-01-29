@@ -1,5 +1,7 @@
---1/28/2018 linkbox jump correctlymon
---do not jump if use click a same link
+--1/29/2018 --automatic switch heroku database and local database
+
+--1/28/2018 --linkbox jump correctlymon
+--1/28/2018 --do not jump if use click a same link
 
 
 --load all banner resource  

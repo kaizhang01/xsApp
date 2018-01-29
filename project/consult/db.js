@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose');
 const config = require('../../server/config.js');
+
 exports.connectDb=function(url) {
     mongoose.connect(url, { useMongoClient: true });
     console.log("Connected successfully to database");

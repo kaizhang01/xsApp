@@ -9,7 +9,6 @@ let db;
 exports.init = function () {
     routine = require(config.cfg.routine);
     db = require(config.cfg.db);
-    db.connectDb(config.cfg.dbName);
 };
 
 exports.handle = function (req, res) {

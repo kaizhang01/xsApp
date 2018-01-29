@@ -2,6 +2,7 @@
 const config = require("./config.js");
 const server = require("./server.js");
 const router = require("./router.js");
+const db = require("./db.js");
 function* Tasks() {
 
     yield config.read([
@@ -11,7 +12,7 @@ function* Tasks() {
         "./project/consult/mainMenu.json"
     ]);
 
-
+    db.init();
     router.init();
     //open local mongo fist when test locally
 
